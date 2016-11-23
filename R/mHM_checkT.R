@@ -12,39 +12,32 @@
 #' @examples
 #' 
 #' @export mHM_checkT
-
-
-# check minimum and maximum temperature for consistency
-# if Tmax < Tmin interchange values
-
-# library(RNetCDF)
-
-#setwd("/Users/brennerj/Documents/mHM_sim/Jucar/JucarBasin/meteo/km10_spain02/")
+#' 
 
 mHM_checkT <- function(nc.tmin, nc.tmax)
 {
-  # read netcdf 
-  # tmin
+  # read netcdf files 
+  # minimum air temperature
   tmin_op <-  RNetCDF::open.nc(nc.tmin, write = TRUE)
   tmin <- RNetCDF::var.get.nc(tmin_op,"tmin")
   
-  # tmin
+  # maximum air temperature
   tmax_op <-  RNetCDF::open.nc(nc.tmax, write = TRUE)
   tmax <- RNetCDF::var.get.nc(tmax_op,"tmax")
   
+  # if more than 0 tmax smaller than tmin
   if (any(tmax < tmin, na.rm=TRUE)) {
-    #tmax
+    # if tmax < tmin or tmin > tmax interchange values
     tmax_check <- ifelse(tmax < tmin, tmin, tmax)
     tmin_check <- ifelse(tmin > tmax, tmax, tmin)
-    
-    # give back to nc
+    # give back values to netCDF object
     RNetCDF::var.put.nc(tmax_op, "tmax", tmax_check)
     RNetCDF::var.put.nc(tmin_op, "tmin", tmin_check)
   } else {
-    print("maximum air temperature higher than minimum air temperature for all values. Nothing to do.")
+    # netCDF files are consistent
+    print("maximum air temperature higher than minimum air temperature for whole field. Nothing to do.")
   }
-  
-  # close connection
+  # close open connections
   RNetCDF::close.nc(tmax_op)
   RNetCDF::close.nc(tmin_op)
 }
