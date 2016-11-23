@@ -11,5 +11,6 @@ Imports:
     zoo,
     readr,
     stringr,
-    hydroGOF
+    hydroGOF,
+    RNetCDF
 RoxygenNote: 5.0.1

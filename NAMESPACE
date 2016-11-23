@@ -2,5 +2,6 @@
 
 export(chr2vec)
 export(mHM_GOF4period)
+export(mHM_checkT)
 export(mHM_read.nml)
 export(mHM_readQ)
