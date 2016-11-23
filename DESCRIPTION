@@ -1,0 +1,15 @@
+Package: mHMr
+Type: Package
+Title: pre- and post-prossesing for mHM
+Version: 0.1.1
+Author: Johannes Brenner
+Maintainer: <johannes.brenner@ufz.de>
+Description: pre- and post-prossesing for the mesoscale hydrological model
+License: What license is it under?
+LazyData: TRUE
+Imports:
+    zoo,
+    readr,
+    stringr,
+    hydroGOF
+RoxygenNote: 5.0.1
