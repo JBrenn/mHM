@@ -15,9 +15,6 @@
 #' @export mHM_maskRaster
 #' 
 
-# mask raster map same proj and extent
-# library(raster)
-
 mHM_maskRaster <- function(mask, inRaster, outRaster)
 {
   # read in mask
