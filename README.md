@@ -2,7 +2,7 @@
 # mHMr
 R package for pre- and postprocessing of the mesoscale hydrological model (mHM)
 * pre-processing
-* post-processing (read output, mapping)
+* post-processing
 
 =======
 
