@@ -1,0 +1,258 @@
+#!/usr/bin/env python
+#############################################
+# calculate latitude and longitude coordinates
+# given header file specifications
+#
+# created by Stephan Thober 20.7.2015
+# modified Stephan Thober, Jun 2016 - adding calculation of corner coordinates, refactoring routines
+#
+#############################################
+
+
+def write_to_ascii(fo, prefix, arr, cskip=6):
+    c = 0
+    text = ''
+    for ii in np.arange(arr.shape[0]):
+        text = text + str(np.round(arr[ii], 3)) + ' '
+        c += 1
+        if c == cskip:
+            fo.write(prefix + text + '\n')
+            prefix = '           '
+            c = 0
+            text = ''
+    if text != '':
+        fo.write(prefix + text + '\n')
+
+
+def xx_to_latlon(xx, yy, coord_sys):
+    if coord_sys == '':
+        longitude = xx
+        latitude = yy
+    else:
+        projAim = Proj(init=coord_sys)
+        longitude, latitude = projAim(xx, yy, inverse=True)
+    return longitude, latitude
+
+
+def header_to_latlon(headerfile, coord_sys, do_corners=False):
+    # This function returns the latitude longitude given a ASCII header file
+
+    # check input files
+    if not os.path.isfile(headerfile):
+      sys.exit("No "+headerfile+" file found here, are you in the right directory?")
+
+    # read header information
+    header_info = np.loadtxt( headerfile, dtype='|S20')
+    ncols       = np.int(header_info[0,1])
+    nrows       = np.int(header_info[1,1])
+    xllcorner   = np.float(header_info[2,1])
+    yllcorner   = np.float(header_info[3,1])
+    cs          = np.float(header_info[4,1])
+    missVal     = header_info[5,1]
+
+    # create x and y grid
+    xx          = np.linspace( xllcorner + cs/2,                xllcorner + cs/2 + (ncols-1)*cs, ncols)
+    yy          = np.linspace( yllcorner + cs/2 + (nrows-1)*cs, yllcorner + cs/2,                nrows)
+    xx, yy      = np.meshgrid(xx,yy)
+
+    #
+    # determine latitude and longitude of the Aimgrid
+    lons, lats = xx_to_latlon(xx, yy, coord_sys)
+
+    if do_corners:
+        # lower left corner
+        ul_xx            = np.linspace(xllcorner,                     xllcorner + (ncols-1)*cs, ncols)
+        ul_yy            = np.linspace(yllcorner + cs + (nrows-1)*cs, yllcorner + cs,           nrows)
+        ul_xx, ul_yy     = np.meshgrid(ul_xx, ul_yy)
+        ul_lons, ul_lats = xx_to_latlon(ul_xx, ul_yy, coord_sys)
+        # lower right corner
+        ur_xx            = np.linspace(xllcorner + cs,                xllcorner + cs + (ncols-1)*cs, ncols)
+        ur_yy            = np.linspace(yllcorner + cs + (nrows-1)*cs, yllcorner + cs,                nrows)
+        ur_xx, ur_yy     = np.meshgrid(ur_xx, ur_yy)
+        ur_lons, ur_lats = xx_to_latlon(ur_xx, ur_yy, coord_sys)
+        # upper right corner
+        lr_xx            = np.linspace(xllcorner + cs,           xllcorner + cs + (ncols-1)*cs, ncols)
+        lr_yy            = np.linspace(yllcorner + (nrows-1)*cs, yllcorner,                     nrows)
+        lr_xx, lr_yy     = np.meshgrid(lr_xx, lr_yy)
+        lr_lons, lr_lats = xx_to_latlon(lr_xx, lr_yy, coord_sys)
+        # upper left corner
+        ll_xx            = np.linspace(xllcorner,                xllcorner + (ncols-1)*cs, ncols)
+        ll_yy            = np.linspace(yllcorner + (nrows-1)*cs, yllcorner,                nrows)
+        ll_xx, ll_yy     = np.meshgrid(ll_xx, ll_yy)
+        ll_lons, ll_lats = xx_to_latlon(ll_xx, ll_yy, coord_sys)
+
+        return lons, lats, xx, yy, missVal, ll_lons, lr_lons, ur_lons, ul_lons, ll_lats, lr_lats, ur_lats, ul_lats
+    else:
+        return lons, lats, xx, yy, missVal
+
+    
+# COORDINATE SYSTEM
+#   if empty string is given, no coordinate transformation will be transformed
+#   code 31463 defines GK (DHDN3 Zone 3)
+#   [website: http://www.spatialreference.org/ref/epsg/31463/]
+#   equal +proj=tmerc +ellps=bessel +lon_0=12 +x_0=3,500,000 +y_0=0
+# coord_sys = 'epsg:31467' # coordinate system for test basin 2
+coord_sys = 'epsg:3035' # coordinate system for EDgE
+
+# HEADER FILE
+#   specifies the grid properties
+#   for example, use a copy of the header.txt
+#   and adapt cellsize, ncols, nrows to your hydrologic resolution
+headerfile = ''
+ncfile = ''
+
+# OUTPUT FILE
+#   path to the output file, latlon.nc is hard-coded in mHM
+outfile = 'grid.des'
+
+# DRAW PLOT USING CARTOPY
+do_plot = False
+
+import argparse
+import textwrap
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 description=textwrap.dedent('''\
+          Description:
+            This is the python script to create a cdo grid description file
+            from a header file and a given geographic projection. The grid
+            description file contains center and corner coordinates if a
+            header file is specified. It can then be used for cdo remapping,
+            for example with bilinear remapping, i.e.,
+            cdo remapbil,<griddes file> infile outfile
+
+          Author:
+            Stephan Thober
+
+          Created:
+            Jun 2016 
+
+          Example:
+            ./remap-grid -g 100km_EDgE.header -o 100km_EDgE.griddes
+            or
+            ./remap-grid -i latlon.nc -o latlon.griddes
+
+          Note:
+            The -n and -g options are mutually exclusive.
+          '''))
+
+parser.add_argument('-c', '--coord_sys', action='store', dest='coord_sys',
+                  default=coord_sys, metavar='Property',
+                  help='Coordinate system specifier according to http://www.spatialreference.org. (default: epsg:31467), give empty string for regular latlon grid')
+parser.add_argument('-g', '--header', action='store', dest='headerfile',
+                  default=headerfile, metavar='Header file',
+                  help='Header file containing information about e.g. number of rows and columns at level 1. (no default).')
+parser.add_argument('-n', '--nc-file', action='store', dest='ncfile', 
+                  default=ncfile, metavar='lat lon file',
+                  help='Netcdf File containing lat and lon coordinates. (no default).')
+parser.add_argument('-o', '--outfile', action='store', dest='outfile', 
+                  default=outfile, metavar='griddes file',
+                  help='Name of grid description file. (default: grid.des).')
+parser.add_argument('-p', '--do-plot', action='store_true', dest='do_plot', 
+                  default=do_plot, 
+                  help='giving this option will cause a plot of the domain and grid cells. This option requires the CARTOPY package (default: False).')
+
+args = parser.parse_args()
+headerfile = args.headerfile
+outfile    = args.outfile   
+coord_sys  = args.coord_sys
+do_plot    = args.do_plot
+ncfile     = args.ncfile
+
+# check whether any headerfiles are given
+if headerfile == '' and ncfile == '':
+    parser.print_usage()
+    raise ValueError('***ERROR: NO headerfile and ncfile specified, use -h switch for more information')
+if headerfile != '' and ncfile != '':
+    parser.print_usage()
+    raise ValueError('***ERROR: BOTH headerfile and ncfile specified, use -h switch for more information')
+del parser, args
+
+#############################################
+
+import numpy as np                     # array manipulation
+import netCDF4 as nc                   # netCDF interphase
+import time, os, sys                   # call current time for timestamp
+from pyproj import Proj
+from ufz    import writenetcdf, readnc # from ufz
+
+if ncfile != '':
+    lats = readnc( ncfile, 'lat' )
+    lons = readnc( ncfile, 'lon' )
+    # if lat and lon are 1 dim, create a grid with meshgrid
+    if len(lats.shape) == 1:
+    	new_lon = np.meshgrid( lons, lats )[0]
+    	new_lat = np.meshgrid( lons, lats )[1]
+    	lons = new_lon
+    	lats = new_lat
+    lats_center = lats.flatten()
+    lons_center = lons.flatten()
+
+if headerfile != '':        
+     #
+     # get lat lon for level 1 header file
+     lons, lats, xx, yy, missVal, ll_lons, lr_lons, ur_lons, ul_lons, ll_lats, lr_lats, ur_lats, ul_lats = header_to_latlon(headerfile, coord_sys, do_corners=True)
+     # convert corners in 1d arrays
+     # COUNTERCLOCKWISE
+     # COUNTERCLOCKWISE
+     # COUNTERCLOCKWISE
+     lons_corner = np.zeros((lons.shape[0] * lons.shape[1] * 4))
+     lats_corner = np.zeros((lats.shape[0] * lats.shape[1] * 4))
+     cc = 0
+     for ii in np.arange(lats.shape[0]):
+         for jj in np.arange(lats.shape[1]):
+             lons_corner[cc * 4: (cc + 1) * 4] = np.array([ll_lons[ii, jj], lr_lons[ii, jj], ur_lons[ii, jj], ul_lons[ii, jj]])
+             lats_corner[cc * 4: (cc + 1) * 4] = np.array([ll_lats[ii, jj], lr_lats[ii, jj], ur_lats[ii, jj], ul_lats[ii, jj]])
+             cc += 1
+     # COUNTERCLOCKWISE
+     # COUNTERCLOCKWISE
+     # COUNTERCLOCKWISE
+     lons_center = lons.flatten()
+     lats_center = lats.flatten()
+
+# -----------------------------------------------------------------------------
+# (2) WRITE TO ASCII FILE -----------------------------------------------------
+# -----------------------------------------------------------------------------
+no_ycells = lats.shape[0]
+xcells = lats.shape[1]
+if outfile != '':
+    fo = open(outfile, 'w' )
+else:
+    from sys import stdout
+    fo = stdout
+# write header
+fo.write('gridtype = curvilinear' + '\n')
+fo.write('gridsize = '+str(xcells*no_ycells) + '\n')
+fo.write('xsize    = '+str(xcells) + '\n')
+fo.write('ysize    = '+str(no_ycells) + '\n')
+#
+# add x values
+write_to_ascii(fo, prefix='xvals    = ', arr=lons_center)
+write_to_ascii(fo, prefix='yvals    = ', arr=lats_center)
+if headerfile != '':
+    write_to_ascii(fo, prefix='xbounds  = ', arr=lons_corner, cskip=4)
+    write_to_ascii(fo, prefix='ybounds  = ', arr=lats_corner, cskip=4)
+
+if outfile != '':
+    fo.close()
+
+print outfile + " created."
+
+
+# -----------------------------------------------------------------------------
+# create plot with cartopy ----------------------------------------------------
+# -----------------------------------------------------------------------------
+if do_plot:
+    import matplotlib.pyplot as plt
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
+
+    # projection = ccrs.LambertConformal(central_latitude=52, central_longitude=10)
+    projection = ccrs.PlateCarree()
+    ax = plt.axes(projection=projection)
+    ax.set_extent([lons_corner.min(), lons_corner.max(), lats.min(), lats.max()])
+    ax.stock_img()
+    ax.coastlines()
+    ax.plot(lons_center, lats_center, marker='.', lw=0., transform=projection)
+    for ii in np.arange(lons_center.shape[0]):
+        ax.plot(lons_corner[ii*4:(ii+1)*4], lats_corner[ii*4:(ii+1)*4], color='r', marker='None', lw=1., transform=projection)
+    plt.show()
