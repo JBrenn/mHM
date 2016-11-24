@@ -1,9 +1,4 @@
-- check Rd cross-references \link{}
-  from Build check:
-    checking Rd cross-references ... WARNING
-    Missing link or links in documentation object 'mHM_formatASC.Rd': ‘raster::writeRaster’
-  
-- include lookup table for function mHM_reclassint.R (landuse mHM - CORINE) as example in /data
+- example in mHM_reclassint.R is not working
 
 - revise function mHM_cropASC
     perhaps no more needed or simplify
