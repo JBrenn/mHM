@@ -25,4 +25,14 @@ This function makes consistant minmum and maximum air temperature fields in netC
 \examples{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
+\references{
+
+}
+\seealso{
+
+}
+\keyword{}
 

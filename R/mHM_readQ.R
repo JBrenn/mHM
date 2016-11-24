@@ -7,6 +7,14 @@
 #' @examples
 #' outQ <- mHM_readQ(outQpath="your/path")
 #' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
+#' 
 #' @export mHM_readQ
 
 mHM_readQ <- function(outQpath)

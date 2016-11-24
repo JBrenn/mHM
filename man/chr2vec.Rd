@@ -19,4 +19,14 @@ Helper for mHM_read.nml
 chr2vec()
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
+\references{
+
+}
+\seealso{
+
+}
+\keyword{}
 

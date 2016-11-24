@@ -23,4 +23,14 @@ raster in given format (\code{outRaster}) written to outRaster
 \examples{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
+\references{
+
+}
+\seealso{
+
+}
+\keyword{}
 

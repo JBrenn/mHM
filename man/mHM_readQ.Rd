@@ -19,4 +19,14 @@ Read mHM daily_discharge.out in zoo object.
 outQ <- mHM_readQ(outQpath="your/path")
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
+\references{
+
+}
+\seealso{
+
+}
+\keyword{}
 

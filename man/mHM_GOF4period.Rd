@@ -32,4 +32,14 @@ data(Qout_mHM)
 cal_gof <- mHM_GOF4period(zoo_obj = Qout_mHM, start = "2000-01-01", end = "2008-03-30", plot = F)
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
+\references{
+
+}
+\seealso{
+
+}
+\keyword{}
 

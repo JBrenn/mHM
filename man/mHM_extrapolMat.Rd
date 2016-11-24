@@ -27,4 +27,14 @@ Extrapolation is performed by a mean value of the surrounding cells of the inval
 \examples{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
+\references{
+
+}
+\seealso{
+
+}
+\keyword{}
 
