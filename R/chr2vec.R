@@ -5,7 +5,10 @@
 #' @return splited, trimed characters in list.
 #' 
 #' @examples
-#' chr2vec()
+#' chr2vec("timestep   =   1")
+#' chr2vec("gaugefile   =  \"basin01.txt\"")
+#' chr2vec("aggregation   =  .TRUE.")
+#' chr2vec( "PETcorr  =  1,1.2,0,95  ")
 #' 
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #' 
