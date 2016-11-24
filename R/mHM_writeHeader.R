@@ -1,4 +1,39 @@
-mHM_writeHeader <- function(rst, L2_res=10000, res=10000, na=-9999, crs_espg=23030, writeHeader=TRUE, pre="headerAtLevel11",
+#' Write mHM header file. 
+#' 
+#' \code{mHM_writeHeader} writes mHM header files, needed in addition to meteo netCDF input files. Moreover,
+#' a .griddes file can be calculated for later use with CDO to remap the netCDF meteo input according to morphological input maps.
+#' 
+#' For remaping the netCDF meteo input see \code{cdo --help remap}. 
+#' The python bash script remap-grid is located in the library directory, folder inst/bash of the package \code{mHMr} (\code{path.package("mHMr")}). 
+#' For further information type \code{./remap-grid --help} after changing directory.
+#' 
+#' @param rst raster object, which will deliver extent, e.g. DEM.
+#' @param L2_res resolution of level L2 data, meteorological input.
+#' @param na na. value
+#' @param crs_espg projection information for \code{rst} in ESPG code.
+#' @param writeHeader boolean, if TRUE header will be written to working directory.
+#' @param pre character, added to header file name.
+#' @param make.griddes boolean, if TRUE calculate .griddes info
+#' @param remap_py_file full path python-bash script remap-grid
+#'  
+#' @return reclassified raster object, wrote to ASCII if writeHeader is TRUE.
+#' If make.griddes is TRUE .griddes file, wrote to working directory.
+#' 
+#' @examples
+#' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
+#' 
+#' @export mHM_writeHeader
+#' 
+
+mHM_writeHeader <- function(rst, L2_res=10000, res=10000, na=-9999, crs_espg=23030, writeHeader=TRUE, 
+                            pre="headerAtLevel11",
                             make.griddes=FALSE, remap_py_file)
 {
   # read raster
