@@ -1,3 +1,30 @@
+#' Reclassify raster with lookuptable. 
+#' 
+#' \code{mHM_reclassint} reclassifies a raster map, e.g. CORINE land use, to specific classes for usage in mHM.
+#' 
+#' 
+#' 
+#' @param rst raster object.
+#' @param lookuptbl lookup table, e.g. given by \code{data()}.
+#' @param tif boolean, if TRUE output raster written in GEOtif format.
+#' @param asc boolean, if TRUE output raster written in ASCII format.
+#' @param varname character, variable name.
+#' 
+#' @return reclassified raster object.
+#' 
+#' @examples
+#' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
+#' 
+#' @export mHM_reclassint
+#' 
+
 mHM_reclassint <- function(rst, lookuptbl, tif=F, asc=F, varname="luse")
 {
   # raster map --> .acs
