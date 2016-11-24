@@ -39,3 +39,5 @@ library(devtools)
 install_github("JBrenn/mHMr")
 library(mHMr)
 ```
+
+=======
