@@ -1,9 +1,11 @@
-#' Read mHM daily_discharge.out in zoo object.
+#' Read mHM simulation namelist mhm.nml.
+#' 
+#' \code{mHM_readnml} reads mHM main simulation namelist mhm.nml.
 #' 
 #' @param simpath path to mHM simulation folder, where mhm.nml is located.
 #' @return list of mHM namelist entries.
 #' @examples
-#' nml <- mHM_read.nml(simpath="your/path")
+#' nml <- mHM_readnml(simpath="your/path")
 #' 
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #' 

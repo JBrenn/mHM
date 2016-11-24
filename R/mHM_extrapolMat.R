@@ -1,4 +1,4 @@
-#' Simple extrapolation arrays in invalid locations. 
+#' Simple extrapolation of 1D-arrays in invalid locations. 
 #' 
 #' \code{mHM_extrapolMat} extrapolates matrix values in invalid location, e.g. originating from 
 #' meteorological input fields for mHM (netCDF format).

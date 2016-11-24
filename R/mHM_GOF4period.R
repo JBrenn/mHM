@@ -1,6 +1,6 @@
-#' Calculate GOFs for time periods.
+#' Calculate GOFs for time intervals.
 #' 
-#' \code{mHM_GOF4period} returns Goodness of Fit (GOF) measures for specific time periods. 
+#' \code{mHM_GOF4period} returns Goodness of Fit (GOF) measures for specific time intervals. 
 #' GOF measures are calculated with \code{hydroGOF::gof}.
 #' 
 #' Besides calculation of GOFs \code{mHM_GOF4period} provides ploting facilities from \code{hydroGOF::ggof}. 

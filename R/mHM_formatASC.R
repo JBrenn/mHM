@@ -1,4 +1,4 @@
-#' Rewrite header of ASCII. 
+#' Reformat ASCII file. 
 #' 
 #' \code{mHM_formatASC} is rewriting the header of an ASCII file being written by \code{\link{raster::writeRaster}}.
 #' 
