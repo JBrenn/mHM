@@ -7,7 +7,7 @@
 mHM_maskRaster(mask, inRaster, outRaster)
 }
 \arguments{
-\item{mask}{raster, either ASCII or GEOtif format.}
+\item{mask}{character, locating and defining raster format (either ASCII or GEOtif) or Raster* object.}
 
 \item{inRaster}{character vector, gives location and format of raster files (either ASCII or GEOtif), 
 with same projection and extent as provided raster mask.}
