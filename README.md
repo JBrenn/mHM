@@ -2,9 +2,10 @@
 # mHMr
 
 R package for pre- and postprocessing of the mesoscale hydrological model (mHM)
-*   pre-processing
+
+###### pre-processing
     
-###### mHM_checkT: check on consistency of minimum and maximum air temperature (netCDF format).
+    mHM_checkT: check on consistency of minimum and maximum air temperature (netCDF format).
     
     mHM_extraploMat: simple extrapolation of 1D-arrays in invalid locations.
     
@@ -18,7 +19,7 @@ R package for pre- and postprocessing of the mesoscale hydrological model (mHM)
     
     mHM_writeHeader: write mHM header file. 
     
-*   post-processing
+###### post-processing
 
     mHM_GOF4period: calculate GOFs for time intervals.
 
