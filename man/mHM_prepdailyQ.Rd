@@ -21,6 +21,9 @@ write mHM conform files to \code{wrriteIN} or working directory
 \description{
 \code{mHM_prepdailyQ} writes mHM standard formated discharge information for model calibration and validation from a zoo object.
 }
+\details{
+If you get an error like error in UseMethod("gof") try to load \code{hydroGOF} library explicitly.
+}
 \examples{
 
 }

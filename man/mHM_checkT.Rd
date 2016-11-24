@@ -23,6 +23,11 @@ Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the war
 This function makes consistant minmum and maximum air temperature fields in netCDF format.
 }
 \examples{
+pkg_path <- path.package("mHMr")
+tmin_netcdf <- file.path(pkg_path, "data", "tmin.nc")
+tmax_netcdf <- file.path(pkg_path, "data", "tmax.nc")
+
+mHM_checkT(nc.tmin = tmin_netcdf, nc.tmax = tmax_netcdf)
 
 }
 \author{
