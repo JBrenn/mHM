@@ -2,7 +2,7 @@
 #' 
 #' \code{mHM_prepdailyQ} writes mHM standard formated discharge information for model calibration and validation from a zoo object.
 #' 
-#' 
+#' If you get an error like error in UseMethod("gof") try to load \code{hydroGOF} library explicitly.
 #' 
 #' 
 #' @param zooobj zoo object, daily time steps.
