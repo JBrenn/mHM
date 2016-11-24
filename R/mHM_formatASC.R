@@ -25,7 +25,7 @@
 
 mHM_formatASC <- function(inASC)
 {
-  for (write2 in inRaster)
+  for (write2 in inASC)
   {
     # correct header format
     system(paste("sed -i -e 's/.000000000000000 / /g' ", write2, sep=""))
