@@ -22,7 +22,7 @@
 #' 
 #' @keywords
 #' 
-#' @export mHM_maskRaster
+#' @export mHM_prepdailyQ
 #' 
 
 mHM_prepdailyQ <- function(zooobj, na_value = -9999, na_ext = TRUE, writeIN = NA)
