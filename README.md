@@ -1,7 +1,7 @@
 =======
 # mHMr
 
-R package for pre- and postprocessing of the mesoscale hydrological model (mHM)
+R package for pre- and postprocessing of the mesoscale hydrological model [(mHM)](http://www.ufz.de/index.php?en=40114).
 
 ###### pre-processing
     
