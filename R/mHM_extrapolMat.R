@@ -19,13 +19,13 @@
 #' tmin_netcdf <- file.path(pkg_path, "data", "tmin.nc")
 #' tmin_op <-  RNetCDF::open.nc(tmin_netcdf)
 #' tmin <- RNetCDF::var.get.nc(tmin_op,"tmin")
-#' image(tmin[,,1])
+#' image(tmin[,,1], zlim = c(2.5,4.5))
 #' 
 #' tmin1 <- mHM_extrapolMat(tmin[,,1], ext=1)
-#' image(tmin1,  zlim = c(2.5,4.5))
+#' image(tmin1, zlim = c(2.5,4.5))
 #' 
 #' tmin2 <- mHM_extrapolMat(tmin[,,1], ext=2)
-#' image(tmin2,  zlim = c(2.5,4.5))
+#' image(tmin2, zlim = c(2.5,4.5))
 #' 
 #' 
 #' 
