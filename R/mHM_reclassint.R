@@ -5,7 +5,7 @@
 #' 
 #' 
 #' @param rst raster object.
-#' @param lookuptbl lookup table, e.g. given by \code{data()}.
+#' @param lookuptbl lookup table, e.g. given by \code{data(luse_reclass)}.
 #' @param tif boolean, if TRUE output raster written in GEOtif format.
 #' @param asc boolean, if TRUE output raster written in ASCII format.
 #' @param varname character, variable name.
@@ -13,10 +13,14 @@
 #' @return reclassified raster object.
 #' 
 #' @examples
+#' library(raster)
+#' 
 #' data(corine_jucar)
+#' corine_jucar <- as.raster(corine_jucar)
 #' plot(corine_jucar)
 #' 
-#' luse_reclass_tbl <- data(luse_reclass)
+#' data(luse_reclass)
+#' luse_reclass <- as.matrix(luse_reclass)
 #' 
 #' mHMluse_jucar <- mHM_reclassint(rst=corine_jucar, lookuptbl=luse_reclass_tbl, tif=F, asc=F, varname="luse")
 #' plot(mHMluse_jucar)
