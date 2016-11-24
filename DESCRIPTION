@@ -12,5 +12,6 @@ Imports:
     readr,
     stringr,
     hydroGOF,
-    RNetCDF
+    RNetCDF,
+    raster
 RoxygenNote: 5.0.1
