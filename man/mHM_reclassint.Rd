@@ -24,6 +24,13 @@ reclassified raster object.
 \code{mHM_reclassint} reclassifies a raster map, e.g. CORINE land use, to specific classes for usage in mHM.
 }
 \examples{
+data(corine_jucar)
+plot(corine_jucar)
+
+luse_reclass_tbl <- data(luse_reclass)
+
+mHMluse_jucar <- mHM_reclassint(rst=corine_jucar, lookuptbl=luse_reclass_tbl, tif=F, asc=F, varname="luse")
+plot(mHMluse_jucar)
 
 }
 \author{

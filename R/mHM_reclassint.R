@@ -13,6 +13,13 @@
 #' @return reclassified raster object.
 #' 
 #' @examples
+#' data(corine_jucar)
+#' plot(corine_jucar)
+#' 
+#' luse_reclass_tbl <- data(luse_reclass)
+#' 
+#' mHMluse_jucar <- mHM_reclassint(rst=corine_jucar, lookuptbl=luse_reclass_tbl, tif=F, asc=F, varname="luse")
+#' plot(mHMluse_jucar)
 #' 
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #' 
