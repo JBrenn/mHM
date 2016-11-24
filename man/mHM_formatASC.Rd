@@ -10,10 +10,10 @@ mHM_formatASC(inASC)
 \item{inASC}{character vector, gives location of raster files in ASCII format.}
 }
 \description{
-\code{mHM_formatASC} is rewriting the header of an ASCII file being written by \code{\link{raster::writeRaster}}.
+\code{mHM_formatASC} is rewriting the header of an ASCII file being written by \code{\link{writeRaster}}.
 }
 \details{
-ASCII files written by \code{\link{raster::writeRaster}} do not fullfil conventions for mHM input ASCII files.
+ASCII files written by \code{\link{writeRaster}} do not fullfil conventions for mHM input ASCII files.
 This function rewrites the header and find&replaces additional zeros appended to -9999 values.
 }
 \examples{
