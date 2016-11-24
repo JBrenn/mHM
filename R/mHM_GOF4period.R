@@ -11,10 +11,20 @@
 #' @param start start date, either Date object or character in the following format yyyy-mm-dd.
 #' @param end end date, either Date object or character in the following format yyyy-mm-dd.
 #' @param plot boolean, if TRUE ggof plot from hydroGOF package.
+#' 
 #' @return numeric vector of GOF values.
+#' 
 #' @examples
 #' data(Qout_mHM)
 #' cal_gof <- mHM_GOF4period(zoo_obj = Qout_mHM, start = "2000-01-01", end = "2008-03-30", plot = F)
+#'
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
 #' 
 #' @export mHM_GOF4period
 

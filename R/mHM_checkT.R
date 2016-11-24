@@ -8,8 +8,18 @@
 #' 
 #' @param nc.tmin netCDF of minimum air temperature.
 #' @param nc.tmax netCDF of maximum air temperature.
+#' 
 #' @return re-write input netCDF files with consistent air temperatures.
+#' 
 #' @examples
+#' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
 #' 
 #' @export mHM_checkT
 #' 

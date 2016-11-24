@@ -7,6 +7,14 @@
 #' @examples
 #' chr2vec()
 #' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
+#' 
 #' @export chr2vec
 
 chr2vec <- function(chr)

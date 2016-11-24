@@ -10,8 +10,18 @@
 #' 
 #' @param data matrix.
 #' @param ext radius within grid cells are extended, starting from valid values.
+#' 
 #' @return matrix.
+#' 
 #' @examples
+#' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
 #' 
 #' @export mHM_extrapolMat
 #' 

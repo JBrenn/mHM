@@ -10,7 +10,16 @@
 #' @param outRaster character vector, defining raster format and location of the outfile, same length as \code{inRaster}.
 #' 
 #' @return raster in given format (\code{outRaster}) written to outRaster
+#' 
 #' @examples
+#' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
 #' 
 #' @export mHM_maskRaster
 #' 
