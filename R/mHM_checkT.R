@@ -12,6 +12,11 @@
 #' @return re-write input netCDF files with consistent air temperatures.
 #' 
 #' @examples
+#' pkg_path <- path.package("mHMr")
+#' tmin_netcdf <- file.path(pkg_path, "data", "tmin.nc")
+#' tmax_netcdf <- file.path(pkg_path, "data", "tmax.nc")
+#' 
+#' mHM_checkT(nc.tmin = tmin_netcdf, nc.tmax = tmax_netcdf)
 #' 
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #' 
