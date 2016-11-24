@@ -13,5 +13,6 @@ Imports:
     stringr,
     hydroGOF,
     RNetCDF,
-    raster
+    raster,
+    rgdal
 RoxygenNote: 5.0.1

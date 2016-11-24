@@ -13,6 +13,8 @@ mHM_writeHeader(rst, L2_res = 10000, res = 10000, na = -9999,
 
 \item{L2_res}{resolution of level L2 data, meteorological input.}
 
+\item{res}{resolution in header file.}
+
 \item{na}{na. value}
 
 \item{crs_espg}{projection information for \code{rst} in ESPG code.}

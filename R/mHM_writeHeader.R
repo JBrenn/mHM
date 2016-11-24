@@ -9,6 +9,7 @@
 #' 
 #' @param rst raster object, which will deliver extent, e.g. DEM.
 #' @param L2_res resolution of level L2 data, meteorological input.
+#' @param res resolution in header file.
 #' @param na na. value
 #' @param crs_espg projection information for \code{rst} in ESPG code.
 #' @param writeHeader boolean, if TRUE header will be written to working directory.
