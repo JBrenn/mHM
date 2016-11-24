@@ -2,7 +2,7 @@
 % Please edit documentation in R/mHM_readnml.R
 \name{mHM_readnml}
 \alias{mHM_readnml}
-\title{Read mHM daily_discharge.out in zoo object.}
+\title{Read mHM simulation namelist mhm.nml.}
 \usage{
 mHM_readnml(simpath)
 }
@@ -13,10 +13,10 @@ mHM_readnml(simpath)
 list of mHM namelist entries.
 }
 \description{
-Read mHM daily_discharge.out in zoo object.
+\code{mHM_readnml} reads mHM main simulation namelist mhm.nml.
 }
 \examples{
-nml <- mHM_read.nml(simpath="your/path")
+nml <- mHM_readnml(simpath="your/path")
 
 }
 \author{

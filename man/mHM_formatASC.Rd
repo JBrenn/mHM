@@ -2,7 +2,7 @@
 % Please edit documentation in R/mHM_formatASC.R
 \name{mHM_formatASC}
 \alias{mHM_formatASC}
-\title{Rewrite header of ASCII.}
+\title{Reformat ASCII file.}
 \usage{
 mHM_formatASC(inASC)
 }

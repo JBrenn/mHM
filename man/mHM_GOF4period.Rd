@@ -2,7 +2,7 @@
 % Please edit documentation in R/mHM_GOF4period.R
 \name{mHM_GOF4period}
 \alias{mHM_GOF4period}
-\title{Calculate GOFs for time periods.}
+\title{Calculate GOFs for time intervals.}
 \usage{
 mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE)
 }
@@ -19,7 +19,7 @@ mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE)
 numeric vector of GOF values.
 }
 \description{
-\code{mHM_GOF4period} returns Goodness of Fit (GOF) measures for specific time periods. 
+\code{mHM_GOF4period} returns Goodness of Fit (GOF) measures for specific time intervals. 
 GOF measures are calculated with \code{hydroGOF::gof}.
 }
 \details{
