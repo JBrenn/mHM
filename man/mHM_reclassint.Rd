@@ -9,7 +9,7 @@ mHM_reclassint(rst, lookuptbl, tif = F, asc = F, varname = "luse")
 \arguments{
 \item{rst}{raster object.}
 
-\item{lookuptbl}{lookup table, e.g. given by \code{data()}.}
+\item{lookuptbl}{lookup table, e.g. given by \code{data(luse_reclass)}.}
 
 \item{tif}{boolean, if TRUE output raster written in GEOtif format.}
 
@@ -24,10 +24,14 @@ reclassified raster object.
 \code{mHM_reclassint} reclassifies a raster map, e.g. CORINE land use, to specific classes for usage in mHM.
 }
 \examples{
+library(raster)
+
 data(corine_jucar)
+corine_jucar <- as.raster(corine_jucar)
 plot(corine_jucar)
 
-luse_reclass_tbl <- data(luse_reclass)
+data(luse_reclass)
+luse_reclass <- as.matrix(luse_reclass)
 
 mHMluse_jucar <- mHM_reclassint(rst=corine_jucar, lookuptbl=luse_reclass_tbl, tif=F, asc=F, varname="luse")
 plot(mHMluse_jucar)
