@@ -1,12 +1,17 @@
 Package: mHMr
 Type: Package
 Title: pre- and post-prossesing for mHM
-Version: 0.1.1
+Version: 0.1.57
+Date: 2016-11-25
 Author: Johannes Brenner
 Maintainer: <johannes.brenner@ufz.de>
-Description: pre- and post-prossesing for the mesoscale hydrological model
-License: What license is it under?
+Description: pre- and post-prossesing for the mesoscale hydrological model (mHM)
+License: GPL (>= 2)
+Repository: https://github.com/JBrenn/mHMr
+URL: https://github.com/JBrenn/mHMr, http://www.ufz.de/mhm/
 LazyData: TRUE
+Depends:
+    R (>= 3.3)
 Imports:
     zoo,
     readr,
