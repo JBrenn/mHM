@@ -3,7 +3,7 @@
 #' \code{mHM_avg2zoo} is retrieving a basin summary, depicted by function \code{fun}, and giving back a zoo object.
 #' 
 #' 
-#' @param con coneection to netCDF.
+#' @param con connection to netCDF.
 #' @param var variable name.
 #' @param datetime Date, POSIX or Yearmon object.
 #' @param fun function to summarize/aggregate basin.
@@ -20,7 +20,7 @@
 #' 
 #' @keywords
 #'  
-#' @export mHM_getDateTime
+#' @export mHM_avg2zoo
 #'
 #'
 mHM_avg2zoo <- function(con, var, datetime, fun)

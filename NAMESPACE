@@ -2,6 +2,7 @@
 
 export(chr2vec)
 export(mHM_GOF4period)
+export(mHM_avg2zoo)
 export(mHM_checkT)
 export(mHM_extrapolMat)
 export(mHM_formatASC)

@@ -7,7 +7,7 @@
 mHM_avg2zoo(con, var, datetime, fun)
 }
 \arguments{
-\item{con}{coneection to netCDF.}
+\item{con}{connection to netCDF.}
 
 \item{var}{variable name.}
 
