@@ -1,8 +1,9 @@
-#' Read mHM simulation namelist mhm.nml.
+#' Read mHM simulation namelist.
 #' 
-#' \code{mHM_readnml} reads mHM main simulation namelist mhm.nml.
+#' \code{mHM_readnml} reads mHM simulation namelists, e.g. mhm.nml.
 #' 
-#' @param simpath path to mHM simulation folder, where mhm.nml is located.
+#' @param simpath path to mHM simulation folder, where namelist is located.
+#' @param namelist name of namelist.
 #' @return list of mHM namelist entries.
 #' @examples
 #' nml <- mHM_readnml(simpath="your/path")
@@ -17,9 +18,9 @@
 #' 
 #' @export mHM_readnml
 
-mHM_readnml <- function(simpath)
+mHM_readnml <- function(simpath, namelist)
 {
-  nml_lines <- readr::read_lines(file = file.path(simpath, "mhm.nml"))
+  nml_lines <- readr::read_lines(file = file.path(simpath, namelist))
   
   # remove empty lines and out-commented ones
   nml_lines <- nml_lines[-which(grepl("!",substr(nml_lines,1,1)))]
@@ -37,7 +38,7 @@ mHM_readnml <- function(simpath)
   {
     #block i
     block_i <- nml_lines[(forloop[i]+1):((forloop[i+1])-2)]
-    nml[[nml_names[i]]] <- sapply(X = block_i, FUN = chr2vec, USE.NAMES = F)
+    nml[[nml_names[i]]] <- sapply(X = block_i, FUN = mHMr::chr2vec, USE.NAMES = F)
   }
   
   return(nml)

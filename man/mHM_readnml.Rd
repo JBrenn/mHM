@@ -2,18 +2,20 @@
 % Please edit documentation in R/mHM_readnml.R
 \name{mHM_readnml}
 \alias{mHM_readnml}
-\title{Read mHM simulation namelist mhm.nml.}
+\title{Read mHM simulation namelist.}
 \usage{
-mHM_readnml(simpath)
+mHM_readnml(simpath, namelist)
 }
 \arguments{
-\item{simpath}{path to mHM simulation folder, where mhm.nml is located.}
+\item{simpath}{path to mHM simulation folder, where namelist is located.}
+
+\item{namelist}{name of namelist.}
 }
 \value{
 list of mHM namelist entries.
 }
 \description{
-\code{mHM_readnml} reads mHM main simulation namelist mhm.nml.
+\code{mHM_readnml} reads mHM simulation namelists, e.g. mhm.nml.
 }
 \examples{
 nml <- mHM_readnml(simpath="your/path")
