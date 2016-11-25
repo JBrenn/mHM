@@ -40,7 +40,9 @@ mHM_getDateTime <- function(con)
   ts_chron <- start_chron + datetime_int/24
   
   # if daily data return Date object
-  if (unique(diff(ts_chron)) == 1) ts_date <- as.Date(ts_chron)
+  if (any(diff(ts_chron) == 1)) {
+    if (unique(diff(ts_chron)) == 1) ts_date <- as.Date(ts_chron)
+  }
   
   # if monthly data return YearMon object
   if (mean(diff(ts_chron)) > 29) ts_date <- zoo::as.yearmon(ts_chron)
