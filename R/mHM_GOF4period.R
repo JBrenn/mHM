@@ -28,7 +28,7 @@
 #' 
 #' @export mHM_GOF4period
 
-mHM_GOF4period <- function(zoo_obj, start=NA, end=NA, plot=FALSE)
+mHM_GOF4period <- function(zoo_obj, start=NA, end=NA, plot=FALSE, pdf=FALSE)
 {
   # set start to start date of zoo_obj if is NA
   # create date object if not provided
@@ -60,8 +60,17 @@ mHM_GOF4period <- function(zoo_obj, start=NA, end=NA, plot=FALSE)
   gofs <- hydroGOF::gof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs])
   
   if (plot) {
-    hydroGOF::ggof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], ftype = "dm", FUN = mean, legend = c(sim_col,obs_col))
-    hydroGOF::ggof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], ftype = "seasonal", FUN = mean, legend = c(sim_col,obs_col))
+    if (pdf) {
+      pdf("dm.pdf")
+      hydroGOF::ggof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], ftype = "dm", FUN = mean, legend = c(sim_col,obs_col))
+      dev.off()
+      pdf("sesonal.pdf")
+      hydroGOF::ggof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], ftype = "seasonal", FUN = mean, legend = c(sim_col,obs_col))
+      dev.off()
+    } else {
+      hydroGOF::ggof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], ftype = "dm", FUN = mean, legend = c(sim_col,obs_col))
+      hydroGOF::ggof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], ftype = "seasonal", FUN = mean, legend = c(sim_col,obs_col))
+    }
   }
  
   return(gofs)   

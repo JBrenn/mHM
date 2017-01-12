@@ -20,10 +20,10 @@
 #' 
 #' @keywords
 #'  
-#' @export mHM_avg2zoo
+#' @export mHM_avgnetcdf2zoo
 #'
 #'
-mHM_avg2zoo <- function(con, var, datetime, fun)
+mHM_avgnetcdf2zoo <- function(con, var, datetime, fun)
 {
   # dummy
   var_fun <- c()

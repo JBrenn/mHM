@@ -1,6 +1,7 @@
 #' Read mHM daily_discharge.out in zoo object.
 #' 
 #' @param outQpath path to folder containing the file daily_discharge.
+#' @param dischargeFile name of discharge file, default = "daily_discharge.out"
 #' 
 #' @return daily zoo object including observed and simulated discharge.
 #' 
@@ -17,14 +18,10 @@
 #' 
 #' @export mHM_readQ
 
-mHM_readQ <- function(outQpath, dischargeFile = NA)
+mHM_readQ <- function(outQpath, dischargeFile = "daily_discharge.out")
 {
   # read daily_discharge.out file
-  if (is.na(dischargeFile)) {
-    qout <- readr::read_table(file = file.path(outQpath,"daily_discharge.out"))
-  } else {
-    qout <- readr::read_table(file = file.path(outQpath, dischargeFile))
-  }
+  qout <- readr::read_table(file = file.path(outQpath, dischargeFile))
   
   
   # make time series / zoo object

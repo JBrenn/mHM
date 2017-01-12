@@ -33,6 +33,9 @@ mHM_recalcAlpha <- function(swc, pwp, sat)
   {
     # 
     alpha[,,i] = (swc[,,i] - pwp) / (sat - pwp)
+    
+    alpha[,,i] <- ifelse(swc[,,i] <= pwp, 0, alpha[,,i])
+    alpha[,,i] <- ifelse(swc[,,i] >  sat, 1, alpha[,,i])
   }
   
   return(alpha)
