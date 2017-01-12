@@ -17,10 +17,15 @@
 #' 
 #' @export mHM_readQ
 
-mHM_readQ <- function(outQpath)
+mHM_readQ <- function(outQpath, dischargeFile = NA)
 {
   # read daily_discharge.out file
-  qout <- readr::read_table(file = file.path(outQpath,"daily_discharge.out"))
+  if (is.na(dischargeFile)) {
+    qout <- readr::read_table(file = file.path(outQpath,"daily_discharge.out"))
+  } else {
+    qout <- readr::read_table(file = file.path(outQpath, dischargeFile))
+  }
+  
   
   # make time series / zoo object
   days <- as.Date(paste(qout$Year, qout$Mon, qout$Day, sep="-"), format = "%Y-%m-%d")
