@@ -78,7 +78,14 @@ mHM_writeHeader <- function(rst, L2_res=10000, res=10000, na=-9999, crs_espg=230
   
   #create new grid for netCDF files with python function remap-grid
   if (make.griddes)
-    system(paste(remap_py_file," -c 'epsg:23030' -g ",pre,"_",L2_res,"m.txt -o ",res,"m.griddes",sep=""))
-  
+  {
+    bahs_call <- paste(remap_py_file," -c 'epsg:",crs_espg,"' -g ",pre,"_",L2_res,"m.txt -o ",res,"m.griddes",sep="")
+    system(bahs_call)
+    
+    print("if an error occurs in creating new grid for netCDF try to run the following line in the terminal:")
+    print(bahs_call)
+    
+  }
+    
   return(ext_deg)
 }
