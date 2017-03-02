@@ -1,14 +1,14 @@
-#' Prepare daily discharge files for mHM. 
+#' Prepare daily river flow files for mHM. 
 #' 
-#' \code{mHM_prepdailyQ} writes mHM standard formated discharge information for model calibration and validation from a zoo object.
+#' \code{mHM_prepdailyQ} writes mHM standard formated river flow information for model calibration and validation from a zoo object.
 #' 
 #' If you get an error like error in UseMethod("gof") try to load \code{hydroGOF} library explicitly.
 #' 
 #' 
 #' @param zooobj zoo object, daily time steps.
-#' @param na_value NA value. 
-#' @param na_ext boolean, if TRUE time period written out will be defined by begin and end date of zoo object.
-#' @param writeIN character vector, setting utput file location, if is NA output files will be written in working directory.
+#' @param na_value NA value, default = -9999. 
+#' @param na_ext boolean, if TRUE (defaulrt) time period written out will be defined by begin and end date of zoo object.
+#' @param writeIN character vector, setting output file location, if is NA (default) output files will be written in working directory.
 #' 
 #' @return write mHM conform files to \code{wrriteIN} or working directory
 #' 
