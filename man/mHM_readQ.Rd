@@ -4,10 +4,12 @@
 \alias{mHM_readQ}
 \title{Read mHM daily_discharge.out in zoo object.}
 \usage{
-mHM_readQ(outQpath)
+mHM_readQ(outQpath, dischargeFile = "daily_discharge.out")
 }
 \arguments{
 \item{outQpath}{path to folder containing the file daily_discharge.}
+
+\item{dischargeFile}{name of discharge file, default = "daily_discharge.out"}
 }
 \value{
 daily zoo object including observed and simulated discharge.
@@ -19,14 +21,13 @@ Read mHM daily_discharge.out in zoo object.
 outQ <- mHM_readQ(outQpath="your/path")
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-

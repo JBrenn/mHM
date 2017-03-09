@@ -19,14 +19,13 @@ This function rewrites the header and find&replaces additional zeros appended to
 \examples{
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{ascii}
-

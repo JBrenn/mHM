@@ -2,24 +2,24 @@
 % Please edit documentation in R/mHM_prepdailyQ.R
 \name{mHM_prepdailyQ}
 \alias{mHM_prepdailyQ}
-\title{Prepare daily discharge files for mHM.}
+\title{Prepare daily river flow files for mHM.}
 \usage{
 mHM_prepdailyQ(zooobj, na_value = -9999, na_ext = TRUE, writeIN = NA)
 }
 \arguments{
 \item{zooobj}{zoo object, daily time steps.}
 
-\item{na_value}{NA value.}
+\item{na_value}{NA value, default = -9999.}
 
-\item{na_ext}{boolean, if TRUE time period written out will be defined by begin and end date of zoo object.}
+\item{na_ext}{boolean, if TRUE (default) time period written out will be defined by begin and end date of zoo object.}
 
-\item{writeIN}{character vector, setting utput file location, if is NA output files will be written in working directory.}
+\item{writeIN}{character vector, setting output file location, if is NA (default) output files will be written in working directory.}
 }
 \value{
 write mHM conform files to \code{wrriteIN} or working directory
 }
 \description{
-\code{mHM_prepdailyQ} writes mHM standard formated discharge information for model calibration and validation from a zoo object.
+\code{mHM_prepdailyQ} writes mHM standard formated river flow information for model calibration and validation from a zoo object.
 }
 \details{
 If you get an error like error in UseMethod("gof") try to load \code{hydroGOF} library explicitly.
@@ -27,14 +27,13 @@ If you get an error like error in UseMethod("gof") try to load \code{hydroGOF} l
 \examples{
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-

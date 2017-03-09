@@ -4,7 +4,7 @@
 \alias{mHM_GOF4period}
 \title{Calculate GOFs for time intervals.}
 \usage{
-mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE)
+mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE, pdf = FALSE)
 }
 \arguments{
 \item{zoo_obj}{zoo object containing observed and simulated daily discharge.}
@@ -32,14 +32,13 @@ data(Qout_mHM)
 cal_gof <- mHM_GOF4period(zoo_obj = Qout_mHM, start = "2000-01-01", end = "2008-03-30", plot = F)
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-

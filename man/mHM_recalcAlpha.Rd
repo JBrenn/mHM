@@ -27,14 +27,13 @@ Back-calculation is based on soil water content (\eqn{x_{3}}), permanent wilting
 \examples{
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
-
+\code{\link{mHM_vargetmulti}}
+}
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
 }
 \keyword{}
-

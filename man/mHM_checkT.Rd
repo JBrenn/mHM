@@ -30,14 +30,13 @@ tmax_netcdf <- file.path(pkg_path, "data", "tmax.nc")
 mHM_checkT(nc.tmin = tmin_netcdf, nc.tmax = tmax_netcdf)
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-

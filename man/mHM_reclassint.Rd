@@ -37,14 +37,13 @@ mHMluse_jucar <- mHM_reclassint(rst=corine_jucar, lookuptbl=luse_reclass_tbl, ti
 plot(mHMluse_jucar)
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-

@@ -22,14 +22,13 @@ chr2vec("aggregation   =  .TRUE.")
 chr2vec( "PETcorr  =  1,1.2,0,95  ")
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-

@@ -21,14 +21,13 @@ list of mHM namelist entries.
 nml <- mHM_readnml(simpath="your/path")
 
 }
-\author{
-Johannes Brenner \email{johannes.brenner@ufz.de}
-}
 \references{
 
 }
 \seealso{
 \code{\link{chr2vec}}
 }
+\author{
+Johannes Brenner \email{johannes.brenner@ufz.de}
+}
 \keyword{}
-
