@@ -7,7 +7,7 @@
 #' 
 #' @param zooobj zoo object, daily time steps.
 #' @param na_value NA value, default = -9999. 
-#' @param na_ext boolean, if TRUE (defaulrt) time period written out will be defined by begin and end date of zoo object.
+#' @param na_ext boolean, if TRUE (default) time period written out will be defined by begin and end date of zoo object.
 #' @param writeIN character vector, setting output file location, if is NA (default) output files will be written in working directory.
 #' 
 #' @return write mHM conform files to \code{wrriteIN} or working directory
@@ -80,7 +80,7 @@ mHM_prepdailyQ <- function(zooobj, na_value = -9999, na_ext = TRUE, writeIN = NA
     # extract date
     date <- time(zoodata)
     df <- data.frame(Y=format(date,"%Y"),m=format(date,"%m"),d=format(date,"%d"),
-                     H="00",M="00",data=round(coredata(zoodata),3))
+                     H="00",M="00",data=round(zoo::coredata(zoodata),3))
     # write mHM input files
     write.table(x = df, file = file.path(writeIN,paste(i,".txt", sep="")), append = T, quote = F, sep = "  ", na = "-9999", 
                 row.names = F, col.names = F)
