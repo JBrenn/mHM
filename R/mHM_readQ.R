@@ -21,8 +21,7 @@
 mHM_readQ <- function(outQpath, dischargeFile = "daily_discharge.out")
 {
   # read daily_discharge.out file
-  qout <- readr::read_table(file = file.path(outQpath, dischargeFile))
-  
+  qout <- readr::read_table(file = file.path(outQpath, dischargeFile), na = c("NA", "-9999"))
   
   # make time series / zoo object
   days <- as.Date(paste(qout$Year, qout$Mon, qout$Day, sep="-"), format = "%Y-%m-%d")
