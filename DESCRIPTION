@@ -19,5 +19,8 @@ Imports:
     hydroGOF,
     RNetCDF,
     raster,
-    rgdal
+    rgdal,
+    chron,
+    lubridate,
+    ncdf4
 RoxygenNote: 6.0.1
