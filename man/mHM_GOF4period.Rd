@@ -28,6 +28,8 @@ By default three plots are produced: daily and monthly aggregation, seasonal agg
 all of them comparing simulated and observed discharge time series.
 }
 \examples{
+library(zoo)
+library(hydroGOF)
 data(Qout_mHM)
 cal_gof <- mHM_GOF4period(zoo_obj = Qout_mHM, start = "2000-01-01", end = "2008-03-30", plot = F)
 
