@@ -31,7 +31,7 @@ all of them comparing simulated and observed discharge time series.
 library(zoo)
 library(hydroGOF)
 data(Qout_mHM)
-cal_gof <- mHM_GOF4period(zoo_obj = Qout_mHM, start = "2000-01-01", end = "2008-03-30", plot = F)
+cal_gof <- mHM_GOF4period(zoo_obj = Qout_mHM, start = "2000-01-01", end = "2008-03-30", plot = FALSE)
 
 }
 \references{
