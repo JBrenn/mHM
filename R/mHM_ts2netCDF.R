@@ -105,8 +105,8 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
   RNetCDF::att.put.nc(new_nc, var.name, "units", "NC_CHAR", unit)
   RNetCDF::att.put.nc(new_nc, var.name, "standard_name", "NC_CHAR", var.name)
   RNetCDF::att.put.nc(new_nc, var.name, "long_name", "NC_CHAR", var.name)
-  RNetCDF::att.put.nc(new_nc, var.name, "missing_value", "NC_INT", -9999.)
-  RNetCDF::att.put.nc(new_nc, var.name, "_FillValue", "NC_INT", -9999.)
+  RNetCDF::att.put.nc(new_nc, var.name, "missing_value", "NC_DOUBLE", -9999.)
+  RNetCDF::att.put.nc(new_nc, var.name, "_FillValue", "NC_DOUBLE", -9999.)
   RNetCDF::att.put.nc(new_nc, var.name, "coordinates", "NC_CHAR", "lat lon")
   
   rst_val <- raster::values(dem_rst)
