@@ -4,14 +4,17 @@
 \alias{mHM_getDateTime}
 \title{get date(time) object from netCDF.}
 \usage{
-mHM_getDateTime(con, start_datetime = "1950-01-01 00:00:00", unit = "d")
+mHM_getDateTime(nc_file, start_datetime = "1950-01-01 00:00:00",
+  in_unit = "h", out_unit = "d")
 }
 \arguments{
-\item{con}{connection to netCDF file, see \code{\link{open.nc}}.}
-
 \item{start_datetime}{character, start datetime of netCDF, default: '1950-01-01 00:00:00'.}
 
-\item{unit}{definition of datetime unit; 'h'=hour ,'d'=day, 'm'=month.}
+\item{in_unit}{definition of datetime unit in; 'h'=hour ,'d'=day, 'm'=month.}
+
+\item{out_unit}{definition of datetime unit out; 'h'=hour ,'d'=day, 'm'=month.}
+
+\item{con}{connection to netCDF file, see \code{\link{open.nc}}.}
 }
 \value{
 Chron datetime, Date or Yearmon object, depending on mHM output definition.
