@@ -6,7 +6,8 @@
 #' 
 #' @param con connection to netCDF file, see \code{\link{open.nc}}.
 #' @param start_datetime character, start datetime of netCDF, default: '1950-01-01 00:00:00'.
-#' @param unit definition of datetime unit; 'h'=hour ,'d'=day, 'm'=month.
+#' @param in_unit definition of datetime unit in; 'h'=hour ,'d'=day, 'm'=month.
+#' @param out_unit definition of datetime unit out; 'h'=hour ,'d'=day, 'm'=month.
 #' 
 #' @return Chron datetime, Date or Yearmon object, depending on mHM output definition.
 #' 
@@ -23,8 +24,9 @@
 #' @export mHM_getDateTime
 #'
 #'
-mHM_getDateTime <- function(con, start_datetime="1950-01-01 00:00:00", unit="d")
+mHM_getDateTime <- function(nc_file, start_datetime="1950-01-01 00:00:00", in_unit="h", out_unit="d")
 {
+  con <- RNetCDF::open.nc(nc_file)
   # get time units
   #units <- RNetCDF::att.get.nc(ncfile = con, variable = "time", attribute = "units")
   # get time var
@@ -39,14 +41,21 @@ mHM_getDateTime <- function(con, start_datetime="1950-01-01 00:00:00", unit="d")
   # create chron object origin
   start_chron <- chron::chron(dates. = start_date, times. = start_time, format = c(dates="y-m-d", times="h:m:s"))
   # create chron time series
-  ts_chron <- start_chron + datetime_int/24
+  if (in_unit == "h") fact <- 24
+  if (in_unit == "d") fact <- 1
+  ts_chron <- start_chron + datetime_int/fact
   
   # if daily data return Date object
-  if (unit == "d") ts_date <- as.Date(ts_chron)
+  if (out_unit == "d") ts_date <- as.Date(ts_chron) else
+    # if monthly data return YearMon object
+    if (out_unit == "m") ts_date <- zoo::as.yearmon(ts_chron) else 
+      # stay by hourly
+      if (out_unit == "h")  ts_date <- ts_chron else 
+        # print error message
+        print("ERROR: please give valid date (time) specification for argument unit! h: hourly, d: daily, m: monthly")
+
+  RNetCDF::close.nc(con) 
   
-  # if monthly data return YearMon object
-  if (unit == "m") ts_date <- zoo::as.yearmon(ts_chron)
-   
   # return time series date
   return(ts_date)
 }
