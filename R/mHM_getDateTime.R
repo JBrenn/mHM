@@ -5,8 +5,6 @@
 #' 
 #' 
 #' @param con connection to netCDF file, see \code{\link{open.nc}}.
-#' @param start_datetime character, start datetime of netCDF, default: '1950-01-01 00:00:00'.
-#' @param in_unit definition of datetime unit in; 'h'=hour ,'d'=day, 'm'=month.
 #' @param out_unit definition of datetime unit out; 'h'=hour ,'d'=day, 'm'=month.
 #' 
 #' @return Chron datetime, Date or Yearmon object, depending on mHM output definition.
@@ -24,7 +22,7 @@
 #' @export mHM_getDateTime
 #'
 #'
-mHM_getDateTime <- function(nc_file, start_datetime="1950-01-01 00:00:00", in_unit="h", out_unit="d")
+mHM_getDateTime <- function(nc_file, out_unit="d")
 {
   con <- RNetCDF::open.nc(nc_file)
   # get time units
@@ -32,12 +30,21 @@ mHM_getDateTime <- function(nc_file, start_datetime="1950-01-01 00:00:00", in_un
   # get time var
   datetime_int <- RNetCDF::var.get.nc(ncfile = con, variable = "time")  
   
+  # get time units
+  units <- RNetCDF::att.get.nc(ncfile = con, variable = "time", attribute = "units")
+  # extract unit
+  if (grepl("hours", units)) in_unit <- "h"
+  if (grepl("days", units)) in_unit <- "d"
+  if (grepl("months", units)) in_unit <- "m"
+  
   # start datetime
-  #start_datetime <- stringr::str_sub(string = units, start = nchar(units)-18, end = nchar(units)) 
+  dashes_units <- gregexpr("-", units)[[1]]
+  start_datetime <- stringr::str_sub(string = units, start = dashes[1]-4, end = nchar(units)) 
   # get start date
-  start_date <- stringr::str_sub(string = start_datetime, start = 1, end = 10)
+  tab_start_datetime <- gregexpr(" ", start_datetime)[[1]]
+  start_date <- stringr::str_sub(string = start_datetime, start = 1, end = tab_start_datetime[1]-1)
   # get start time
-  start_time <- stringr::str_sub(string = start_datetime, start = 12, end = 19)
+  start_time <- stringr::str_sub(string = start_datetime, start = tab_start_datetime[1]+1, end = nchar(start_datetime))
   # create chron object origin
   start_chron <- chron::chron(dates. = start_date, times. = start_time, format = c(dates="y-m-d", times="h:m:s"))
   # create chron time series
