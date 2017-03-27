@@ -39,7 +39,7 @@ mHM_getDateTime <- function(nc_file, out_unit="d")
   
   # start datetime
   dashes_units <- gregexpr("-", units)[[1]]
-  start_datetime <- stringr::str_sub(string = units, start = dashes[1]-4, end = nchar(units)) 
+  start_datetime <- stringr::str_sub(string = units, start = dashes_units[1]-4, end = nchar(units)) 
   # get start date
   tab_start_datetime <- gregexpr(" ", start_datetime)[[1]]
   start_date <- stringr::str_sub(string = start_datetime, start = 1, end = tab_start_datetime[1]-1)
