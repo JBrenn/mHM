@@ -15,7 +15,7 @@ mHM_readNCvar(ncfile, var)
 array
 }
 \description{
-\code{mHM_readNCvar} is reading time series data of a specific variable from netCDF
+\code{mHM_readNCvar} is reading data of a specific variable from netCDF.
 }
 \examples{
 

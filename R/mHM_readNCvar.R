@@ -1,6 +1,6 @@
 #' read netCDF variable. 
 #' 
-#' \code{mHM_readNCvar} is reading time series data of a specific variable from netCDF
+#' \code{mHM_readNCvar} is reading data of a specific variable from netCDF.
 #' 
 #' 
 #' @param ncfile character, netCDF file path.
