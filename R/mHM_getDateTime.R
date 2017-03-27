@@ -18,7 +18,7 @@
 #' @seealso
 #' 
 #' @keywords
-#'  
+#'
 #' @export mHM_getDateTime
 #'
 #'
