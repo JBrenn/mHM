@@ -51,22 +51,26 @@ mHM_ts2existNC <- function(nc_file, var, ts)
   # get time and variable data
   time    <- RNetCDF::var.get.nc(nc_con, "time")
   vardata <- RNetCDF::var.get.nc(nc_con, "pre")
-  vardata_old <- vardata
-  
-  # impute new data
-  vardata[time%in%dateintfrom1950] <- coredata(ts)
-  
-  # write back variable data
-  RNetCDF::var.put.nc(ncfile = nc_con, variable = var, data = vardata, start = c(1,1,1), count = c(1,1,dim(vardata)))
-  
-  # close nc connection
-  RNetCDF::close.nc(nc_con)
   
   # create zoo object for return
-  var_old_zoo <- zoo::zoo(vardata_old, as.Date(time, origin=start_date))
+  var_old_zoo <- zoo::zoo(vardata, as.Date(time, origin=start_date))
   # merge time series 
   ts_zoo <- merge(var_old_zoo, ts)
   names(ts_zoo) <- c("old", "new")
+  
+  # impute NAs of "old"
+  coredata(ts_zoo[,"old"])[is.na(coredata(ts_zoo[,"old"]))] <- coredata(ts_zoo[,"new"])[is.na(coredata(ts_zoo[,"old"]))]
+  # impute NAs of "new"
+  coredata(ts_zoo[,"new"])[is.na(coredata(ts_zoo[,"new"]))] <- coredata(ts_zoo[,"old"])[is.na(coredata(ts_zoo[,"new"]))]
+  
+  # write back variable data
+  RNetCDF::var.put.nc(ncfile = nc_con, variable = var, data = coredata(ts_zoo[,"new"]), start = c(1,1,1), 
+                      count = c(1,1,length(coredata(ts_zoo[,"new"]))))
+  # write back time data
+  dateintfrom1950 <- as.numeric(time(ts_zoo)) - as.numeric(as.Date("1950-01-01"))
+  RNetCDF::var.put.nc(ncfile = nc_con, variable = "time", data = dateintfrom1950, start = 1, count = length(dateintfrom1950))
+  # close nc connection
+  RNetCDF::close.nc(nc_con)
   
   # return
   return(ts_zoo)
