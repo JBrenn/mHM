@@ -18,7 +18,7 @@
 #' 
 #' @keywords
 #'  
-#' @export mHM_readNCvar
+#' @export mHM_readNCvar2zoo
 #' 
 #' 
 mHM_readNCvar2zoo <- function(ncfile, var, out_unit="d") {
