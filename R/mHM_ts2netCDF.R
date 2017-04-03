@@ -29,11 +29,21 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
                           var.name, unit) {
   # read asc
   dem_rst <- raster::raster(dem)
+  # valid cells in rst
+  rst_val <- raster::values(dem_rst)
+  rst_imp <- which(!is.na(rst_val))
+  
+  # if only a single valid raster cell 
+  # l11 representation else l0 representation
+  if (length(rst_val)>1) level <- "l0" else level <- "l11"
+  
   # read latlon
   latlon_nc <- RNetCDF::open.nc(latlon)
-  lon_l0 <- RNetCDF::var.get.nc(ncfile = latlon_nc, variable = "lon_l0")
-  lat_l0 <- RNetCDF::var.get.nc(ncfile = latlon_nc, variable = "lat_l0")
+  lon_level <- RNetCDF::var.get.nc(ncfile = latlon_nc, variable = paste("lon_",level,sep=""))
+  lat_level <- RNetCDF::var.get.nc(ncfile = latlon_nc, variable = paste("lat_",level,sep=""))
   RNetCDF::close.nc(latlon_nc)
+  if (!is.matrix(lat_level)) lat_level <- as.matrix(lat_level)
+  if (!is.matrix(lon_level)) lon_level <- as.matrix(lon_level)
   # create new output netCDF  
   new_nc <- RNetCDF::create.nc(filename = outfile)  
   
@@ -67,10 +77,10 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
   # copy attributes to new_nc
   
   # set y-lat dimension, length: dim(lat)
-  RNetCDF::dim.def.nc(ncfile = new_nc, dimname = "y", dimlength = dim(lat_l0)[1])
+  RNetCDF::dim.def.nc(ncfile = new_nc, dimname = "y", dimlength = dim(lat_level)[1])
   
   # set x-lon dimension, length: dim(lon)
-  RNetCDF::dim.def.nc(ncfile = new_nc, dimname = "x", dimlength = dim(lon_l0)[1])
+  RNetCDF::dim.def.nc(ncfile = new_nc, dimname = "x", dimlength = dim(lon_level)[1])
   
   # latitude, longitude
   # variable definition
@@ -79,9 +89,9 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
   # longitude, dim(x,y)
   RNetCDF::var.def.nc(ncfile = new_nc, varname = "lon", vartype = "NC_DOUBLE", dimensions = c("x","y"))
   # put latitude in degree
-  RNetCDF::var.put.nc(ncfile = new_nc, variable = "lat", data = lat_l0)
+  RNetCDF::var.put.nc(ncfile = new_nc, variable = "lat", data = lat_level)
   # put longitude in degree
-  RNetCDF::var.put.nc(ncfile = new_nc, variable = "lon", data = lon_l0)
+  RNetCDF::var.put.nc(ncfile = new_nc, variable = "lon", data = lon_level)
   
   RNetCDF::att.put.nc(new_nc, "lat", "units", "NC_CHAR", "degrees_north")
   RNetCDF::att.put.nc(new_nc, "lat", "standard_name", "NC_CHAR", "latitude")
@@ -109,9 +119,6 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
   RNetCDF::att.put.nc(new_nc, var.name, "_FillValue", "NC_DOUBLE", -9999.)
   RNetCDF::att.put.nc(new_nc, var.name, "coordinates", "NC_CHAR", "lat lon")
   
-  rst_val <- raster::values(dem_rst)
-  rst_imp <- which(!is.na(rst_val))
-  
   for (i in 1:length(zoo::coredata(data)))
   # set data in rst
   {
@@ -120,7 +127,7 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
     
     # put data
     RNetCDF::var.put.nc(ncfile = new_nc, variable = var.name, data = rst_val,
-                        start = c(1,1,i), count=c(dim(lon_l0)[1],dim(lat_l0)[1],1))
+                        start = c(1,1,i), count=c(dim(lon_level)[1],dim(lat_level)[1],1))
     # print 
     print(paste(i, "of", length(times), "| value:",round(zoo::coredata(data)[i],2), unit))
   }
