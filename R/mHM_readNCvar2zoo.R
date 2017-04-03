@@ -28,8 +28,9 @@ mHM_readNCvar2zoo <- function(ncfile, var, out_unit="d") {
   var_data <- RNetCDF::var.get.nc(ncfile = nc_con, variable = var)
   # close connection
   RNetCDF::close.nc(nc_con)
-  # mask data
-  var_data <- mHMr::mHM_maskNCvar(var_data)
+  # mask data if x,y dim > 1
+  if (!is.na(dim(var_data)[2]))
+    var_data <- mHMr::mHM_maskNCvar(var_data)
   # retrieve datetime
   datetime <- mHMr::mHM_getDateTime(nc_file = ncfile, out_unit = out_unit)
   # create zoo object
