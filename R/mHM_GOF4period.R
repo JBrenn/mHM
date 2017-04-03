@@ -11,6 +11,8 @@
 #' @param start start date, either Date object or character in the following format yyyy-mm-dd.
 #' @param end end date, either Date object or character in the following format yyyy-mm-dd.
 #' @param plot boolean, if TRUE ggof plot from hydroGOF package.
+#' @param KGEonly boolean, if TRUE only GOF KGE is given back, in addition to the Kling-Gupta efficiency  the Pearson product-moment correlation coefficient (‘r’), the ratio between the mean of the simulated values to the mean of observations (‘Beta’), and the variability measure (‘Gamma’ or ‘Alpha’ the Pearson product-moment correlation coefficient (‘r’), the ratio between the mean of the simulated values to the mean of observations (‘Beta’), and the variability measure (‘Gamma’ or ‘Alpha’, depending on the value of method))
+#' @param method see help(hydroGOF::KGE), default: "2009"
 #' 
 #' @return numeric vector of GOF values.
 #' 
@@ -30,7 +32,7 @@
 #' 
 #' @export mHM_GOF4period
 
-mHM_GOF4period <- function(zoo_obj, start=NA, end=NA, plot=FALSE, pdf=FALSE)
+mHM_GOF4period <- function(zoo_obj, start=NA, end=NA, plot=FALSE, pdf=FALSE, KGEonly=TRUE, method="2009")
 {
   # set start to start date of zoo_obj if is NA
   # create date object if not provided
@@ -59,7 +61,9 @@ mHM_GOF4period <- function(zoo_obj, start=NA, end=NA, plot=FALSE, pdf=FALSE)
   obs_col <- names(zoo_obj)[obs]
   
   # calculate GOFs
-  gofs <- hydroGOF::gof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs])
+  if (KGEonly) 
+    gofs <- hydroGOF::KGE(sim = zoo_obj[,sim], obs =  zoo_obj[,obs], method = method, out.type = "full") else 
+      gofs <- hydroGOF::gof(sim = zoo_obj[,sim], obs =  zoo_obj[,obs])
   
   if (plot) {
     if (pdf) {
