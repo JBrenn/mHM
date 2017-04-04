@@ -4,7 +4,8 @@
 \alias{mHM_GOF4period}
 \title{Calculate GOFs for time intervals.}
 \usage{
-mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE, pdf = FALSE)
+mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE, pdf = FALSE,
+  KGEonly = TRUE, method = "2009")
 }
 \arguments{
 \item{zoo_obj}{zoo object containing observed and simulated daily discharge.}
@@ -14,6 +15,10 @@ mHM_GOF4period(zoo_obj, start = NA, end = NA, plot = FALSE, pdf = FALSE)
 \item{end}{end date, either Date object or character in the following format yyyy-mm-dd.}
 
 \item{plot}{boolean, if TRUE ggof plot from hydroGOF package.}
+
+\item{KGEonly}{boolean, if TRUE only GOF KGE is given back, in addition to the Kling-Gupta efficiency  the Pearson product-moment correlation coefficient (‘r’), the ratio between the mean of the simulated values to the mean of observations (‘Beta’), and the variability measure (‘Gamma’ or ‘Alpha’ the Pearson product-moment correlation coefficient (‘r’), the ratio between the mean of the simulated values to the mean of observations (‘Beta’), and the variability measure (‘Gamma’ or ‘Alpha’, depending on the value of method))}
+
+\item{method}{see help(hydroGOF::KGE), default: "2009"}
 }
 \value{
 numeric vector of GOF values.
