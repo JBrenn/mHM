@@ -7,7 +7,7 @@
 mHM_ts2existNC(nc_file, var, ts)
 }
 \arguments{
-\item{nc_file}{connection to netCDF file, see \code{\link{open.nc}}.}
+\item{nc_file}{netCDF file.}
 
 \item{ts}{zoo object, time series data}
 }

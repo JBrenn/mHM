@@ -2,7 +2,7 @@
 #' 
 #' \code{mHM_ts2existNC} takes an existing netCDF file at a single site and feeds it with new time series data.
 #' 
-#' @param nc_file connection to netCDF file, see \code{\link{open.nc}}.
+#' @param nc_file netCDF file.
 #' @param ts zoo object, time series data
 #' 
 #' @return netCDF file, new time series data imputed.
