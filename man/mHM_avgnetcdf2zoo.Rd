@@ -19,7 +19,7 @@ mHM_avgnetcdf2zoo(ncfile, var, fun, out_unit = "d")
 Zoo object.
 }
 \description{
-\code{mHM_avg2zoo} is retrieving a basin summary, depicted by function \code{fun}, and giving back a zoo object.
+\code{mHM_avg2zoo} is retrieving a basin summary and giving back a zoo object.
 }
 \examples{
 
