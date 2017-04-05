@@ -1,6 +1,6 @@
 #' get summarized zoo object for mHM basin. 
 #' 
-#' \code{mHM_avg2zoo} is retrieving a basin summary, depicted by function \code{fun}, and giving back a zoo object.
+#' \code{mHM_avg2zoo} is retrieving a basin summary and giving back a zoo object.
 #' 
 #' 
 #' @param ncfile mHM netCDF output file.
