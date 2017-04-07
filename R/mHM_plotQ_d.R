@@ -45,7 +45,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   # open pdf dev.out
   pdf(outfile)
   # define plot parameters
-  op <- par(cex=1.25, mar=c(5.1,4.6,4.1,2.1))
+  op <- par(cex=1.5, mar=c(5.1,4.6,4.1,2.1))
   # rolling mean, k steps
   ts_roll <- zoo::rollmean(ts, k = rollsteps)
   # window data 
