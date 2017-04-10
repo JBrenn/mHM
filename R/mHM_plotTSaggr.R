@@ -36,7 +36,7 @@
 mhm_plotTSaggr <- function(obs = "/Users/brennerj/tmp/eve_f2_data/data/processed/Jucar/EC_sites/06/input/optional_data/level11/et.nc",
                            sim = c("/Users/brennerj/tmp/eve_f2_work/mHMruns/002_Jucar_EC/005_forward_06_local_qparam/output/mHM_Fluxes_States.nc",
                                      "/Users/brennerj/tmp/eve_f2_home/mHMruns/002_Jucar_EC/06/001/out/mHM_Fluxes_States.nc"), 
-                           obs_var="et", sim_var="aET", aggr="month", aggr_fun=sum, outfile, simnames = c("optim_Q","optim_ET"), 
+                           obs_var="et", sim_var="aET", aggr="month", aggr_fun=sum, outfile="out.pdf", simnames = c("optim_Q","optim_ET"), 
                            cols = c(rgb(1,0,0,.7), rgb(0,1,0,.7),  rgb(0,0,1,.7)), cumsums=F)
 {
   # read observation time series
@@ -57,11 +57,11 @@ mhm_plotTSaggr <- function(obs = "/Users/brennerj/tmp/eve_f2_data/data/processed
   
   # time aggregation data
   if (aggr=="day") {
-    data_ts <- aggregate(x = data_ts, by = as.Date(time(data_ts)), FUN=FUN, na.rm=T)
+    data_ts <- aggregate(x = data_ts, by = as.Date(time(data_ts)), FUN=aggr_fun, na.rm=T)
   } else if (aggr=="month") {
-    data_ts <- aggregate(x = data_ts, by = as.yearmon(time(data_ts)), FUN=FUN, na.rm=T)
+    data_ts <- aggregate(x = data_ts, by = as.yearmon(time(data_ts)), FUN=aggr_fun, na.rm=T)
   } else if (aggr=="year") {
-    data_ts <- aggregate(x = data_ts, by = as.integer(format(time(data_ts), "%Y")), FUN=FUN, na.rm=T)
+    data_ts <- aggregate(x = data_ts, by = as.integer(format(time(data_ts), "%Y")), FUN=aggr_fun, na.rm=T)
   } else {
     print("WARNING. no valid aggregation char given: do not aggregate data")
   }
@@ -76,7 +76,7 @@ mhm_plotTSaggr <- function(obs = "/Users/brennerj/tmp/eve_f2_data/data/processed
     }
     data_dim2 <- dim(data_ts_p)[2]
     # open pdf dev.out
-    pdf(outfile)
+    pdf(outfile, width = 11)
     op <- par(cex=1.5, lwd=2)
     plot(data_ts_p, screen=rep(1,data_dim2), type=c("p", rep("s",data_dim2-1)), 
          col=cols, pch=c(19,rep(2,data_dim2-1)), 
