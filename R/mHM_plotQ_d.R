@@ -43,7 +43,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                         rollsteps = 10, outfile = "out.pdf", basinid) 
 {
   # open pdf dev.out
-  pdf(outfile)
+  pdf(outfile, width = 10)
   # define plot parameters
   op <- par(cex=1.5, mar=c(5.1,4.6,4.1,2.1))
   # rolling mean, k steps
