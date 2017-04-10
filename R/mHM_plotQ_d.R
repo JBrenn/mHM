@@ -42,30 +42,10 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                         validTime = c(start=as.Date("1990-01-01"), end=as.Date("1999-12-31")),
                         rollsteps = 10, outfile = "out.pdf", basinid) 
 {
-  # open pdf dev.out
-  pdf(outfile, width = 10)
-  # define plot parameters
-  op <- par(cex=1.5, mar=c(5.1,4.6,4.1,2.1))
   # rolling mean, k steps
   ts_roll <- zoo::rollmean(ts, k = rollsteps)
   # window data 
   ts_win  <- window(ts_roll, start = windows[1], end = windows[2])
-  # empty plot
-  plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="Year")  
-  # plot polygon, calibration period
-  if (!is.null(calibTime))
-    xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
-            col = grey.colors(n = 1, start = .5, end = .5, alpha = .3))
-  # plot time series
-  # observation
-  lines(ts_win[,1], col=rgb(0,0,1,.5), lwd=2)
-  # simulation
-  lines(ts_win[,2], col=rgb(1,0,0,.5), lwd=2)
-  # legend
-  legend("topright", legend = c("observation","simulation"), lwd = 3, col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
-  par(op)
-  dev.off()
-  
   
   if (!is.null(calibTime) && !is.null(validTime)) {
     # window calibration period
@@ -80,7 +60,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                        gof_value=round(c(unlist(GOFs_c),unlist(GOFs_v)), 2), 
                        sim_per=c(rep("calib",5),rep("valid",5)), basin=basinid)
   } 
-
+  
   if (is.null(validTime) && is.null(validTime)) {
     ts_win <- window(ts, start = windows[1], end = windows[2])
     GOFs <- KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
@@ -89,6 +69,38 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
     GOFs <- data.frame(gof_type=names(unlist(GOFs_c)), gof_value=unlist(GOFs_c),
                        basin=basinid)
   }
+  
+  # open pdf dev.out
+  pdf(outfile, width = 10)
+  # define plot parameters
+  op <- par(cex=1.5, mar=c(5.1,4.6,4.1,2.1))
+  # empty plot
+  plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="Year")  
+  # plot polygon, calibration period
+  if (!is.null(calibTime))
+    xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
+            col = grey.colors(n = 1, start = .5, end = .5, alpha = .3))
+  # plot time series
+  # observation
+  lines(ts_win[,1], col=rgb(0,0,1,.5), lwd=2)
+  # simulation
+  lines(ts_win[,2], col=rgb(1,0,0,.5), lwd=2)
+  # legend
+  legend("topright", legend = c("observation","simulation"), lwd = 3, col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
+  # legend KGE
+  kgetxtcal <- paste(c("KGE=", "r=", "beta=", "alpha="), 
+                  GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("calib", GOFs$sim_per)], 
+                  sep="")
+  kgetxtcal <- paste(kgetxtcal[1], kgetxtcal[2], kgetxtcal[3] ,kgetxtcal[4], sep=", ")
+  kgetxtcal <- paste("cal: ", kgetxtcal, sep="")
+  kgetxtval <- paste(c("KGE=", "r=", "beta=", "alpha="), 
+                     GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("valid", GOFs$sim_per)], 
+                     sep="")
+  kgetxtval <- paste(kgetxtval[1], kgetxtval[2], kgetxtval[3] ,kgetxtval[4], sep=", ")
+  kgetxtcal <- paste("val: ", kgetxtval, sep="")
+  legend("topleft", legend = c(kgetxtcal, kgetxtval), col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n", lwd=3)
+  par(op)
+  dev.off()
   
   return(GOFs)
 }
