@@ -34,7 +34,7 @@
 #' @export mhm_plotTSaggr
 #' 
 mhm_plotTSaggr <- function(obs = "/Users/brennerj/tmp/eve_f2_data/data/processed/Jucar/EC_sites/06/input/optional_data/level11/et.nc",
-                           sim = c("/Users/brennerj/tmp/eve_f2_work/mHMruns/002_Jucar_EC/005_forward_06_local_qparam/output/mHM_Fluxes_States.nc",
+                           sim = c("/Users/brennerj/tmp/eve_f2_work/jucar_eddy_out/06/site_meteo/01/01/output/mHM_Fluxes_States.nc",
                                      "/Users/brennerj/tmp/eve_f2_home/mHMruns/002_Jucar_EC/06/001/out/mHM_Fluxes_States.nc"), 
                            obs_var="et", sim_var="aET", aggr="month", aggr_fun=sum, outfile="out.pdf", simnames = c("optim_Q","optim_ET"), 
                            cols = c(rgb(1,0,0,.7), rgb(0,1,0,.7),  rgb(0,0,1,.7)), cumsums=F)
