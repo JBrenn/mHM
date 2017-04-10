@@ -98,7 +98,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                      sep="")
   kgetxtval <- paste(kgetxtval[1], kgetxtval[2], kgetxtval[3] ,kgetxtval[4], sep=", ")
   kgetxtcal <- paste("val: ", kgetxtval, sep="")
-  legend("topleft", legend = c(kgetxtcal, kgetxtval), col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n", lwd=3)
+  legend("topleft", legend = c(kgetxtcal, kgetxtval), col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
   par(op)
   dev.off()
   
