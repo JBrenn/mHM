@@ -44,8 +44,6 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
 {
   # rolling mean, k steps
   ts_roll <- zoo::rollmean(ts, k = rollsteps)
-  # window data 
-  ts_win  <- window(ts_roll, start = windows[1], end = windows[2])
   
   if (!is.null(calibTime) && !is.null(validTime)) {
     # window calibration period
@@ -70,16 +68,23 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                        basin=basinid)
   }
   
+  # window data for ploting
+  ts_win  <- window(ts_roll, start = windows[1], end = windows[2])
+  
   # open pdf dev.out
   pdf(outfile, width = 10)
   # define plot parameters
-  op <- par(cex=1.5, mar=c(5.1,4.6,4.1,2.1))
+  op <- par(cex=1.5, mar=c(5.1,4.6,2.1,2.1))
   # empty plot
-  plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="Year")  
+  plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="Year", bty="n")  
   # plot polygon, calibration period
   if (!is.null(calibTime))
     xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
-            col = grey.colors(n = 1, start = .5, end = .5, alpha = .3))
+            col = grey.colors(n = 1, start = .5, end = .5, alpha = .3), bty="n")
+  # horizontal lines at tickmarks
+  yaxp <- par("yaxp")
+  ticks <- seq(yaxp[1],yaxp[2],(yaxp[2]-yaxp[1])/3)
+  abline(h = ticks[c(-1,-length(ticks))],  col=grey.colors(1,.5,.5,alpha = 1), lty=5)             
   # plot time series
   # observation
   lines(ts_win[,1], col=rgb(0,0,1,.5), lwd=2)
@@ -97,7 +102,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                      GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("valid", GOFs$sim_per)], 
                      sep="")
   kgetxtval <- paste(kgetxtval[1], kgetxtval[2], kgetxtval[3] ,kgetxtval[4], sep=", ")
-  kgetxtcal <- paste("val: ", kgetxtval, sep="")
+  kgetxtval <- paste("val: ", kgetxtval, sep="")
   legend("topleft", legend = c(kgetxtcal, kgetxtval), col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
   par(op)
   dev.off()
