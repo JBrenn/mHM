@@ -83,7 +83,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
             col = grey.colors(n = 1, start = .5, end = .5, alpha = .3), bty="n")
   # horizontal lines at tickmarks
   yaxp <- par("yaxp")
-  ticks <- seq(yaxp[1],yaxp[2],(yaxp[2]-yaxp[1])/3)
+  ticks <- seq(yaxp[1],yaxp[2],(yaxp[2]-yaxp[1])/yaxp[3])
   abline(h = ticks[c(-1,-length(ticks))],  col=grey.colors(1,.5,.5,alpha = 1), lty=5)             
   # plot time series
   # observation
