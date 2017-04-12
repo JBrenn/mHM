@@ -40,7 +40,7 @@
 mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date("2008-03-30")), 
                         calibTime = c(start=as.Date("2000-01-01"), end=as.Date("2008-03-30")), 
                         validTime = c(start=as.Date("1990-01-01"), end=as.Date("1999-12-31")),
-                        rollsteps = 10, outfile = "out.pdf", basinid) 
+                        rollsteps = 10, outfile = "out.pdf", basinid, ylims=NULL) 
 {
   # rolling mean, k steps
   ts_roll <- zoo::rollmean(ts, k = rollsteps)
@@ -74,9 +74,12 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   # open pdf dev.out
   pdf(outfile, width = 10)
   # define plot parameters
-  op <- par(cex=1.5, mar=c(5.1,4.6,2.1,2.1))
+  op <- par(cex=1.5, mar=c(4.1,4.6,1.1,1.1))
   # empty plot
-  plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="Year", bty="n")  
+  if (is.null(ylims))
+    ylims <- c(0,max(ts_win, na.rm=TRUE))
+  # main plot    
+  plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="", bty="n", ylim=ylims)  
   # plot polygon, calibration period
   if (!is.null(calibTime))
     xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
