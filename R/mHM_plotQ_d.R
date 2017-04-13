@@ -90,9 +90,9 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   abline(h = ticks[c(-1,-length(ticks))],  col=grey.colors(1,.5,.5,alpha = 1), lty=5)             
   # plot time series
   # observation
-  lines(ts_win[,1], col=rgb(0,0,1,.5), lwd=2)
+  lines(ts_win[,1], col=rgb(0,0,1,.8), lwd=2.5)
   # simulation
-  lines(ts_win[,2], col=rgb(1,0,0,.5), lwd=2)
+  lines(ts_win[,2], col=rgb(1,0,0,.8), lwd=2.5)
   # legend
   legend("topright", legend = c("observation","simulation"), lwd = 3, col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
   # legend KGE
