@@ -47,7 +47,7 @@ mhm_plotTSaggr <- function(obs = "/Users/brennerj/tmp/eve_f2_data/data/processed
     # read in simulation time series
     sim_ts <- mHM_readNCvar2zoo(infile, sim_var)
     # sim time series with NAs where there are also NAs in observation
-    zoo::coredata(sim_ts)[is.na(zoo::coredata(data_ts[,1]))] <- NA
+    zoo::coredata(sim_ts)[is.na(zoo::coredata(window(data_ts[,1], start = time(sim_ts)[1], end = tail(time(sim_ts),1))))] <- NA
     # merge with obs data
     data_ts <- merge(data_ts, sim_ts)
   }
