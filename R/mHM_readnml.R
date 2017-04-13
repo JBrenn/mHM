@@ -38,7 +38,7 @@ mHM_readnml <- function(simpath, namelist)
   {
     #block i
     block_i <- nml_lines[(forloop[i]+1):((forloop[i+1])-2)]
-    nml[[nml_names[i]]] <- sapply(X = block_i, FUN = mHMr::chr2vec, USE.NAMES = F)
+    nml[[nml_names[i]]] <- sapply(X = block_i, FUN = chr2vec, USE.NAMES = F)
   }
   
   return(nml)
