@@ -43,16 +43,15 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                         validTime = c(start=as.Date("1990-01-01"), end=as.Date("1999-12-31")),
                         rollsteps = 10, outfile = "out.pdf", basinid, ylims=NULL) 
 {
-  # rolling mean, k steps
-  ts_roll <- zoo::rollmean(ts, k = rollsteps)
-  
+
+  # KGE calculation on daily data
   if (!is.null(calibTime) && !is.null(validTime)) {
     # window calibration period
-    ts_win <- window(ts_roll, start = calibTime[1], end = calibTime[2])
+    ts_win <- window(ts, start = calibTime[1], end = calibTime[2])
     GOFs_c <- KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
     GOFs_c$NSE <- NSE(sim = ts_win[,2], obs = ts_win[,1])
     # window validation period
-    ts_win <- window(ts_roll, start = validTime[1], end = validTime[2])
+    ts_win <- window(ts, start = validTime[1], end = validTime[2])
     GOFs_v <- KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
     GOFs_v$NSE <- NSE(sim = ts_win[,2], obs = ts_win[,1])
     GOFs <- data.frame(gof_type=rep(names(unlist(GOFs_c)),2),
@@ -68,6 +67,9 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
     GOFs <- data.frame(gof_type=names(unlist(GOFs_c)), gof_value=unlist(GOFs_c),
                        basin=basinid)
   }
+  
+  # rolling mean, k steps
+  ts_roll <- zoo::rollmean(ts, k = rollsteps)
   
   # window data for ploting
   ts_win  <- window(ts_roll, start = windows[1], end = windows[2])
