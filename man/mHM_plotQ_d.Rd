@@ -7,7 +7,8 @@
 mHM_plotQ_d(ts, windows = c(start = as.Date("1989-10-01"), end =
   as.Date("2008-03-30")), calibTime = c(start = as.Date("2000-01-01"), end =
   as.Date("2008-03-30")), validTime = c(start = as.Date("1990-01-01"), end =
-  as.Date("1999-12-31")), rollsteps = 10, outfile = "out.pdf", basinid)
+  as.Date("1999-12-31")), rollsteps = 10, outfile = "out.pdf", basinid,
+  ylims = NULL)
 }
 \arguments{
 \item{ts}{zoo object, simulated and observed river flow data, as retrived from \code{\link{mhm_readQ}}.}
@@ -23,9 +24,11 @@ mHM_plotQ_d(ts, windows = c(start = as.Date("1989-10-01"), end =
 \item{outfile}{output pdf}
 
 \item{basinid}{character, basin id}
+
+\item{ylims}{numeric vector for y axes limitations, c(min,max)}
 }
 \description{
-\code{mHM_plotQ_d} is pploting a comparison of daily river flow data - simulation vs. observation in pdf file. Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
+\code{mHM_plotQ_d} is ploting a comparison of daily river flow data - mutiple simulations vs. observation in pdf file. Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
 }
 \examples{
 data("Qout_mHM")
@@ -36,7 +39,7 @@ gof <- mHM_plotQ_d(ts = Qout_mHM, windows = c(start=as.Date("1989-10-01"), end=a
                    validTime = c(start=as.Date("1990-01-01"), end=as.Date("1999-12-31"))
                    rollsteps = 10)
                    
-# do not consider calibration/validatio period                  
+# do not consider calibration/validation period                  
 gof <- mHM_plotQ_d(ts = Qout_mHM, windows = c(start=as.Date("1989-10-01"), end=as.Date("2008-03-30")), 
                    calibTime = NULL, validTime = NULL,
                    rollsteps = 10)

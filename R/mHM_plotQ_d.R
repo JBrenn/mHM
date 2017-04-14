@@ -1,6 +1,6 @@
 #' Plot daily river flow. 
 #' 
-#' \code{mHM_plotQ_d} is pploting a comparison of daily river flow data - simulation vs. observation in pdf file. Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
+#' \code{mHM_plotQ_d} is ploting a comparison of daily river flow data - mutiple simulations vs. observation in pdf file. Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
 #' 
 #' @param ts zoo object, simulated and observed river flow data, as retrived from \code{\link{mhm_readQ}}.
 #' @param windows vector of Date objects, defining start and end of series being ploted.
@@ -9,6 +9,7 @@
 #' @param rollsteps integer width of the rolling window, see \code{\link{zoo::rollmean}}
 #' @param outfile output pdf
 #' @param basinid character, basin id
+#' @param ylims numeric vector for y axes limitations, c(min,max)
 #' 
 #' @return NULL
 #' 
@@ -21,7 +22,7 @@
 #'                    validTime = c(start=as.Date("1990-01-01"), end=as.Date("1999-12-31"))
 #'                    rollsteps = 10)
 #'                    
-#' # do not consider calibration/validatio period                  
+#' # do not consider calibration/validation period                  
 #' gof <- mHM_plotQ_d(ts = Qout_mHM, windows = c(start=as.Date("1989-10-01"), end=as.Date("2008-03-30")), 
 #'                    calibTime = NULL, validTime = NULL,
 #'                    rollsteps = 10)
@@ -89,12 +90,13 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   ticks <- seq(yaxp[1],yaxp[2],(yaxp[2]-yaxp[1])/yaxp[3])
   abline(h = ticks[c(-1,-length(ticks))],  col=grey.colors(1,.5,.5,alpha = 1), lty=5)             
   # plot time series
-  # observation
-  lines(ts_win[,1], col=rgb(0,0,1,.8), lwd=2.5)
   # simulation
-  lines(ts_win[,2], col=rgb(1,0,0,.8), lwd=2.5)
+  lines(ts_win[,2], col=rgb(0,0,1,.7), lwd=2.25)
+  # observation
+  lines(ts_win[,1], col=rgb(1,0,0,.75), lwd=.75)
+  lines(ts_win[,1], col=rgb(1,0,0,.8), lwd=3.5, lty=3)
   # legend
-  legend("topright", legend = c("observation","simulation"), lwd = 3, col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
+  legend("topright", legend = c("observation","simulation"), lwd = 3, col=c(rgb(1,0,0,.75), rgb(0,0,1,.75)), bty="n")
   # legend KGE
   kgetxtcal <- paste(c("KGE=", "r=", "beta=", "alpha="), 
                   GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("calib", GOFs$sim_per)], 
@@ -106,7 +108,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                      sep="")
   kgetxtval <- paste(kgetxtval[1], kgetxtval[2], kgetxtval[3] ,kgetxtval[4], sep=", ")
   kgetxtval <- paste("val: ", kgetxtval, sep="")
-  legend("topleft", legend = c(kgetxtcal, kgetxtval), col=c(rgb(0,0,1,.7), rgb(1,0,0,.7)), bty="n")
+  legend("topleft", legend = c(kgetxtcal, kgetxtval), bty="n")
   par(op)
   dev.off()
   
