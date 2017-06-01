@@ -2,17 +2,19 @@
 % Please edit documentation in R/mHM_plotQmulti_d.R
 \name{mHM_plotQmulti_d}
 \alias{mHM_plotQmulti_d}
-\title{Plot daily river flow, mutiple simulations.}
+\title{Plot daily river flow of multiple simulations.}
 \usage{
-mHM_plotQmulti_d(ts, windows = c(start = as.Date("1989-10-01"), end =
+mHM_plotQmulti_d(ts1, ts2, windows = c(start = as.Date("1989-10-01"), end =
   as.Date("2008-03-30")), calibTime = c(start = as.Date("2000-01-01"), end =
   as.Date("2008-03-30")), validTime = c(start = as.Date("1990-01-01"), end =
   as.Date("1999-12-31")), rollsteps = 10, outfile = "out.pdf",
-  ylims = NULL, cols = c(rgb(1, 0, 0, 0.75), rgb(0, 0, 1, 0.7),
-  grey.colors(1, 0.2, 0.2, alpha = 0.75)))
+  ylims = NULL, cols = c(rgb(1, 0, 0, 0.75), grey.colors(1, 0.2, 0.2, alpha
+  = 0.75), rgb(0, 0, 1, 0.7)))
 }
 \arguments{
-\item{ts}{zoo object, simulated and observed river flow data, as retrived from \code{\link{mhm_readQ}}.}
+\item{ts1}{zoo object, observed and simulated river flow data, as retrived from \code{\link{mhm_readQ}}.}
+
+\item{ts2}{zoo object, observed and simulated river flow data, as retrived from \code{\link{mhm_readQ}}.}
 
 \item{windows}{vector of Date objects, defining start and end of series being ploted.}
 
@@ -25,9 +27,12 @@ mHM_plotQmulti_d(ts, windows = c(start = as.Date("1989-10-01"), end =
 \item{outfile}{output pdf}
 
 \item{ylims}{numeric vector for y axes limitations, c(min,max)}
+
+\item{cols}{color definition, lenght = 3}
 }
 \description{
-\code{mHM_plotQmulti_d} is ploting a comparison of daily river flow data - simulation vs. observation in pdf file. Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
+\code{mHM_plotQmulti_d} is ploting a comparison of daily river flow data - simulation vs. observation in pdf file. 
+Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
 }
 \examples{
 data("Qout_mHM")

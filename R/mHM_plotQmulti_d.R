@@ -1,6 +1,7 @@
-#' Plot daily river flow, mutiple simulations. 
+#' Plot daily river flow of multiple simulations. 
 #' 
-#' \code{mHM_plotQmulti_d} is ploting a comparison of daily river flow data - simulation vs. observation in pdf file. Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
+#' \code{mHM_plotQmulti_d} is ploting a comparison of daily river flow data - simulation vs. observation in pdf file. 
+#' Additionally GOFs (KGE, NSE) for cross-validation simulations are calculated, if calibration period is given.
 #' 
 #' @param ts1 zoo object, observed and simulated river flow data, as retrived from \code{\link{mhm_readQ}}.
 #' @param ts2 zoo object, observed and simulated river flow data, as retrived from \code{\link{mhm_readQ}}.
@@ -10,6 +11,7 @@
 #' @param rollsteps integer width of the rolling window, see \code{\link{zoo::rollmean}}
 #' @param outfile output pdf 
 #' @param ylims numeric vector for y axes limitations, c(min,max)
+#' @param cols color definition, lenght = 3
 #' 
 #' @return NULL
 #' 
