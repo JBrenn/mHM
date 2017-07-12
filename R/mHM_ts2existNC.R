@@ -3,6 +3,8 @@
 #' \code{mHM_ts2existNC} takes an existing netCDF file at a single site and feeds it with new time series data.
 #' 
 #' @param nc_file netCDF file.
+#' @param var.old character, varible name of input netCDF file, default = "pre".
+#' @param var.new character, variable name of overwritten netCDF file, default = "et".
 #' @param ts zoo object, time series data
 #' 
 #' @return netCDF file, new time series data imputed.
@@ -20,7 +22,7 @@
 #' @export mHM_ts2existNC
 #'
 #'
-mHM_ts2existNC <- function(nc_file, var, ts)
+mHM_ts2existNC <- function(nc_file, var.old="pre", var.new="et", ts)
 {
   # open netCDF connection
   nc_con <- RNetCDF::open.nc(nc_file, write = T)
@@ -50,7 +52,7 @@ mHM_ts2existNC <- function(nc_file, var, ts)
   
   # get time and variable data
   time    <- RNetCDF::var.get.nc(nc_con, "time")
-  vardata <- RNetCDF::var.get.nc(nc_con, "pre")
+  vardata <- RNetCDF::var.get.nc(nc_con, var.old)
   
   # create zoo object for return
   var_old_zoo <- zoo::zoo(vardata, as.Date(time, origin=start_date))
@@ -67,7 +69,7 @@ mHM_ts2existNC <- function(nc_file, var, ts)
   dateintfrom1950 <- as.numeric(time(ts_zoo)) - as.numeric(as.Date("1950-01-01"))
   RNetCDF::var.put.nc(ncfile = nc_con, variable = "time", data = dateintfrom1950, start = 1, count = length(dateintfrom1950))
   # write back variable data
-  RNetCDF::var.put.nc(ncfile = nc_con, variable = var, data = coredata(ts_zoo[,"new"]), start = c(1,1,1), 
+  RNetCDF::var.put.nc(ncfile = nc_con, variable = var.new, data = coredata(ts_zoo[,"new"]), start = c(1,1,1), 
                       count = c(1,1,length(coredata(ts_zoo[,"new"]))))
 
   # close nc connection
