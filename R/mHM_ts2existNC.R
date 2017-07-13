@@ -69,7 +69,7 @@ mHM_ts2existNC <- function(nc_file, var.old="pre", var.new="et", ts)
   dateintfrom1950 <- as.numeric(time(ts_zoo)) - as.numeric(as.Date("1950-01-01"))
   RNetCDF::var.put.nc(ncfile = nc_con, variable = "time", data = dateintfrom1950, start = 1, count = length(dateintfrom1950))
   # write back variable data
-  RNetCDF::var.put.nc(ncfile = nc_con, variable = var.new, data = coredata(ts_zoo[,"new"]), start = c(1,1,1), 
+  RNetCDF::var.put.nc(ncfile = nc_con, variable = var.old, data = coredata(ts_zoo[,"new"]), start = c(1,1,1), 
                       count = c(1,1,length(coredata(ts_zoo[,"new"]))))
 
   # close nc connection
