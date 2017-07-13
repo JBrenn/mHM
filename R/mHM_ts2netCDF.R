@@ -69,7 +69,8 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
   RNetCDF::var.put.nc(ncfile = new_nc, variable = "time", data = times)
   # set attributes
   # units defining origin, origin can be changed in global settings of zoo - POSIX
-  RNetCDF::att.put.nc(new_nc, "time", "units", "NC_CHAR", paste("days since", as.Date(0, origin = lubridate::origin), "00:00:00", sep=" "))
+  RNetCDF::att.put.nc(new_nc, "time", "units", "NC_CHAR", paste("days since", as.Date(0, origin = lubridate::origin), 
+                                                                "00:00:00", sep=" "))
   RNetCDF::att.put.nc(new_nc, "time", "standard_name", "NC_CHAR", "time")
   RNetCDF::att.put.nc(new_nc, "time", "long_name", "NC_CHAR", "time")
   RNetCDF::att.put.nc(new_nc, "time", "calendar", "NC_CHAR", "standard")
@@ -135,5 +136,4 @@ mHM_ts2netCDF <- function(dem = "./input/morph/dem.asc", latlon = "./input/latlo
   RNetCDF::close.nc(new_nc)
   
   print( paste(outfile, " created.", sep="") )
-
 }
