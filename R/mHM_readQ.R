@@ -24,7 +24,7 @@ mHM_readQ <- function(Qpath, dischargeFile = "daily_discharge.out", inFile=FALSE
   if (inFile) {
     # read daily_discharge.in file
     qin  <- readr::read_table(file = file.path(Qpath, dischargeFile),
-                              na = c("NA", "-9999", "-9999.000", "999.000"),
+                              na = c("NA", "-9999", "-9999.000", "99.000", "999.000", "9999.000"),
                               skip = 5, col_names = F)
     # make time series / zoo object
     days <- as.Date(paste(qin$X1, qin$X2, qin$X3, sep="-"), format = "%Y-%m-%d")
