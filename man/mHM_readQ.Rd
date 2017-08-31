@@ -2,23 +2,25 @@
 % Please edit documentation in R/mHM_readQ.R
 \name{mHM_readQ}
 \alias{mHM_readQ}
-\title{Read mHM daily_discharge.out in zoo object.}
+\title{Read mHM discharge data in zoo object.}
 \usage{
-mHM_readQ(outQpath, dischargeFile = "daily_discharge.out")
+mHM_readQ(Qpath, dischargeFile = "daily_discharge.out", inFile = FALSE)
 }
 \arguments{
-\item{outQpath}{path to folder containing the file daily_discharge.}
+\item{Qpath}{path to folder containing the file daily_discharge (mHM constrain or output).}
 
 \item{dischargeFile}{name of discharge file, default = "daily_discharge.out"}
+
+\item{inFile}{boolean, is given discharge file in mHM constraining data, default = FALSE}
 }
 \value{
 daily zoo object including observed and simulated discharge.
 }
 \description{
-Read mHM daily_discharge.out in zoo object.
+Read mHM discharge data in zoo object.
 }
 \examples{
-outQ <- mHM_readQ(outQpath="your/path")
+outQ <- mHM_readQ(Qpath="your/path")
 
 }
 \references{

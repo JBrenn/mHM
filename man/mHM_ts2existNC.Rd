@@ -4,10 +4,14 @@
 \alias{mHM_ts2existNC}
 \title{impute timeseries in netCDF (at site).}
 \usage{
-mHM_ts2existNC(nc_file, var, ts)
+mHM_ts2existNC(nc_file, var.old = "pre", var.new = "et", ts)
 }
 \arguments{
 \item{nc_file}{netCDF file.}
+
+\item{var.old}{character, varible name of input netCDF file, default = "pre".}
+
+\item{var.new}{character, variable name of overwritten netCDF file, default = "et".}
 
 \item{ts}{zoo object, time series data}
 }
