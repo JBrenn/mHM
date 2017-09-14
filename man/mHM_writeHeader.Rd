@@ -17,7 +17,7 @@ mHM_writeHeader(rst, L2_res = 10000, res = 10000, na = -9999,
 
 \item{na}{na. value}
 
-\item{crs_espg}{projection information for \code{rst} in ESPG code.}
+\item{crs_espg}{interger, projection information for \code{rst} in ESPG code.}
 
 \item{writeHeader}{boolean, if TRUE header will be written to working directory.}
 

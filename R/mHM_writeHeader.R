@@ -11,7 +11,7 @@
 #' @param L2_res resolution of level L2 data, meteorological input.
 #' @param res resolution in header file.
 #' @param na na. value
-#' @param crs_espg projection information for \code{rst} in ESPG code.
+#' @param crs_espg interger, projection information for \code{rst} in ESPG code.
 #' @param writeHeader boolean, if TRUE header will be written to working directory.
 #' @param pre character, added to header file name.
 #' @param make.griddes boolean, if TRUE calculate .griddes info
@@ -46,8 +46,10 @@ mHM_writeHeader <- function(rst, L2_res=10000, res=10000, na=-9999, crs_espg=230
   y_range <- rst_ext@ymax - rst_ext@ymin + L2_res
   
   # number of rows and cols
-  rownm <- floor(y_range/L2_res + 1) * L2_res/res
-  colnm <- floor(x_range/L2_res + 1) * L2_res/res
+  rownm <- ceiling(y_range/L2_res * L2_res/res)
+  colnm <- ceiling(x_range/L2_res * L2_res/res)
+  
+  # 
   
   if (writeHeader) 
   {
