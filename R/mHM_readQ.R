@@ -34,10 +34,11 @@ mHM_readQ <- function(Qpath, dischargeFile = "daily_discharge.out", inFile=FALSE
   } else {
     # read daily_discharge.out file
     qout <- readr::read_table(file = file.path(Qpath, dischargeFile),
-                              na = c("NA", "-9999"))
+                              na = c("-9999", "-9999.00"))
     # make negative values NA
-    qout[,5] <- ifelse(qout[,5] < 0, NA, qout[,5])
-    qout[,6] <- ifelse(qout[,6] < 0, NA, qout[,6])
+    names(qout)[5] = "obs"; names(qout)[6] = "sim"
+    qout$obs <- ifelse(qout$obs < 0, NA, qout$obs)
+    qout$sim <- ifelse(qout$sim < 0, NA, qout$sim)
 
     # make time series / zoo object
     days <- as.Date(paste(qout$Year, qout$Mon, qout$Day, sep="-"), format = "%Y-%m-%d")
