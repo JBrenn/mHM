@@ -7,7 +7,7 @@
 mHM_plotQ_d(ts, windows = c(start = as.Date("1989-10-01"), end =
   as.Date("2008-03-30")), calibTime = c(start = as.Date("2000-01-01"), end =
   as.Date("2008-03-30")), validTime = c(start = as.Date("1990-01-01"), end =
-  as.Date("1999-12-31")), rollsteps = 10, outfile = "out.pdf", basinid,
+  as.Date("1999-12-31")), rollsteps = NA, outfile = "out.pdf", basinid,
   ylims = NULL)
 }
 \arguments{
@@ -19,7 +19,7 @@ mHM_plotQ_d(ts, windows = c(start = as.Date("1989-10-01"), end =
 
 \item{validTime}{vector of Date objects, defining start and end of validation period.}
 
-\item{rollsteps}{integer width of the rolling window, see \code{\link{zoo::rollmean}}}
+\item{rollsteps}{integer width of the rolling window, default = NA no aggregation, see \code{\link{zoo::rollmean}}}
 
 \item{outfile}{output pdf}
 

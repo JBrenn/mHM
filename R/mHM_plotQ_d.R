@@ -69,7 +69,11 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   }
   
   # rolling mean, k steps
-  ts_roll <- zoo::rollmean(ts, k = rollsteps)
+  if (is.na(rollsteps)) {
+    ts_roll <- ts
+  } else {
+    ts_roll <- zoo::rollmean(ts, k = rollsteps)
+  }
   
   # window data for ploting
   ts_win  <- window(ts_roll, start = windows[1], end = windows[2])
