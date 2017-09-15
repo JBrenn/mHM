@@ -42,14 +42,12 @@ mHM_writeHeader <- function(rst, L2_res=10000, res=10000, na=-9999, crs_espg=230
   
   # calculate x, y range
   rst_ext <- raster::extent(rst)
-  x_range <- rst_ext@xmax - rst_ext@xmin + L2_res
-  y_range <- rst_ext@ymax - rst_ext@ymin + L2_res
+  x_range <- rst_ext@xmax - rst_ext@xmin
+  y_range <- rst_ext@ymax - rst_ext@ymin
   
   # number of rows and cols
   rownm <- ceiling(y_range/L2_res * L2_res/res)
   colnm <- ceiling(x_range/L2_res * L2_res/res)
-  
-  # 
   
   if (writeHeader) 
   {
