@@ -26,6 +26,8 @@ mHM_readQ <- function(Qpath, dischargeFile = "daily_discharge.out", inFile=FALSE
     qin  <- readr::read_table(file = file.path(Qpath, dischargeFile),
                               na = c("NA", "-9999", "-9999.000", "99.000", "999.000", "9999.000"),
                               skip = 5, col_names = F)
+    # make negative values NA
+    qin$X6 <- ifelse(qin$X6 < 0, NA, qin$X6)
     # make time series / zoo object
     days <- as.Date(paste(qin$X1, qin$X2, qin$X3, sep="-"), format = "%Y-%m-%d")
     qout_zoo <- zoo::zoo(qin$X6, days)
@@ -33,6 +35,9 @@ mHM_readQ <- function(Qpath, dischargeFile = "daily_discharge.out", inFile=FALSE
     # read daily_discharge.out file
     qout <- readr::read_table(file = file.path(Qpath, dischargeFile),
                               na = c("NA", "-9999"))
+    # make negative values NA
+    qout[,5] <- ifelse(qout[,5] < 0, NA, qout[,5])
+    qout[,6] <- ifelse(qout[,6] < 0, NA, qout[,6])
 
     # make time series / zoo object
     days <- as.Date(paste(qout$Year, qout$Mon, qout$Day, sep="-"), format = "%Y-%m-%d")
