@@ -26,7 +26,7 @@ mHM_enlargeNETCDF <- function(netcdf, x, y, var, fixcorner=1)
   old.data <- RNetCDF::var.get.nc(ncfile = con, variable = var)
   
   # enlarge array to x,y dim
-  new.data <- array(data=NA, dim=c(x,y,dim(dat)[3]))
+  new.data <- array(data=NA, dim=c(x,y,dim(old.data)[3]))
   
   # fixcorner==
   #1 (DEFAULT) - bottomleft
