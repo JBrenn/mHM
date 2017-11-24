@@ -6,7 +6,7 @@
 #' @param windows vector of Date objects, defining start and end of series being ploted.
 #' @param calibTime vector of Date objects, defining start and end of calibration period.
 #' @param validTime vector of Date objects, defining start and end of validation period.
-#' @param rollsteps integer width of the rolling window, see \code{\link{zoo::rollmean}}
+#' @param rollsteps integer width of the rolling window, default = NA no aggregation, see \code{\link{zoo::rollmean}}
 #' @param outfile output pdf
 #' @param basinid character, basin id
 #' @param ylims numeric vector for y axes limitations, c(min,max)
@@ -41,7 +41,7 @@
 mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date("2008-03-30")), 
                         calibTime = c(start=as.Date("2000-01-01"), end=as.Date("2008-03-30")), 
                         validTime = c(start=as.Date("1990-01-01"), end=as.Date("1999-12-31")),
-                        rollsteps = 10, outfile = "out.pdf", basinid, ylims=NULL) 
+                        rollsteps = NA, outfile = "out.pdf", basinid, ylims=NULL) 
 {
 
   # KGE calculation on daily data
