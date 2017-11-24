@@ -1,4 +1,4 @@
-#' @title mHM_enlargeNETCDF
+#' @title enlarge NetCDF files
 #' @description enlarge netCDF file in its x and y dimension
 #' @param netcdf netCDF file
 #' @param x integer, x dimension length after enlargement of field 
@@ -16,7 +16,7 @@
 #' @seealso 
 #'  \code{\link[RNetCDF]{open.nc}},\code{\link[RNetCDF]{var.get.nc}},\code{\link[RNetCDF]{create.nc}},\code{\link[RNetCDF]{dim.def.nc}},\code{\link[RNetCDF]{var.def.nc}},\code{\link[RNetCDF]{att.copy.nc}},\code{\link[RNetCDF]{var.put.nc}},\code{\link[RNetCDF]{close.nc}}
 #' @rdname mHM_enlargeNETCDF
-#' @export 
+#' @export
 #' @importFrom RNetCDF open.nc var.get.nc create.nc dim.def.nc var.def.nc att.copy.nc var.put.nc close.nc
 mHM_enlargeNETCDF <- function(netcdf, x, y, var, fixcorner=1)
 {

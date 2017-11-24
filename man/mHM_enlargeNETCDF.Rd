@@ -2,7 +2,7 @@
 % Please edit documentation in R/mHM_enlargeNETCDF.R
 \name{mHM_enlargeNETCDF}
 \alias{mHM_enlargeNETCDF}
-\title{mHM_enlargeNETCDF}
+\title{enlarge NetCDF files}
 \usage{
 mHM_enlargeNETCDF(netcdf, x, y, var, fixcorner = 1)
 }

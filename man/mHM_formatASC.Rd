@@ -28,4 +28,4 @@ This function rewrites the header and find&replaces additional zeros appended to
 \author{
 Johannes Brenner \email{johannes.brenner@ufz.de}
 }
-\keyword{ascii}
+\keyword{}

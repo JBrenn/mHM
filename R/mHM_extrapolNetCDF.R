@@ -1,16 +1,16 @@
-#' Simple extrapolation of netCDF in invalid locations. 
+#' @title Simple extrapolation of netCDF in invalid/border locations. 
 #' 
-#' \code{mHM_extrapolNetCDF} uses mHM_extrapolMat to extrapolate its matrix values in invalid location, e.g. originating from 
-#' meteorological input fields for mHM (netCDF format).
+#' @description \code{mHM_extrapolNetCDF} uses mHM_extrapolMat to extrapolate its matrix values in invalid and border location, 
+#' e.g. originating from meteorological input fields for mHM (netCDF format).
 #' 
-#' Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning
+#' @details Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning
 #' no meteorological input available for whole simulation domain will be printed. 
 #' This function extrapolates grids in invalid locations within a radius (number of grid cells) given by \code{ext}.
 #' Extrapolation is performed by a mean value of the surrounding cells of the invalid location.
 #' 
 #' Caution: netCDF input file will be overwritten, backup original file before use.
 #' 
-#' @param netCDF netCDF file name, full path.
+#' @param netCDF netCDF file name (full path).
 #' @param var character, name of variable to extrapolate.
 #' @param ext integer, radius (number of grid cells) within grid cells are extended, starting from border grid cells.
 #' @param return boolean, should extrapolated array be returned in console? default=FALSE
@@ -39,12 +39,12 @@
 #' 
 #' @references
 #' 
-#' @seealso
+#' @seealso \code{\link[mHMr]{mHM_extrapolMat}}
 #' 
 #' @keywords
 #' 
 #' @export mHM_extrapolNetCDF
-#' 
+#' @importFrom RNetCDF open.nc var.get.nc var.put.nc close.nc
 
 mHM_extrapolNetCDF <- function(netCDF, var, ext, return=FALSE)
 {

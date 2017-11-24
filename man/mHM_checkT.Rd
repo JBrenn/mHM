@@ -12,11 +12,11 @@ mHM_checkT(nc.tmin, nc.tmax)
 \item{nc.tmax}{netCDF of maximum air temperature.}
 }
 \value{
-re-write input netCDF files with consistent air temperatures.
+re-write input netCDF files with consistent air temperature extremes.
 }
 \description{
 \code{mHM_checkT} proves if minimum air temperature is lower than maximum air temperature. 
-If this is not the case values are interchanged. Input format is netCDF.
+If it is not the case values are interchanged.
 }
 \details{
 Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning Tmax smaller than Tmin (or wise versa) will be printed. 

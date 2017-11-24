@@ -40,12 +40,6 @@ data.frame containing GOF measures (KGE, NSE).
 \description{
 \code{mhm_plotTSaggr} creates a plot (in pdf) comparing .
 }
-\details{
-Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning
-no meteorological input available for whole simulation domain will be printed. 
-This function extrapolates grids in invalid locations within a radius given by \code{ext}.
-Extrapolation is performed by a mean value of the surrounding cells of the invalid location.
-}
 \examples{
 
 

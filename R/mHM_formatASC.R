@@ -1,8 +1,8 @@
-#' Reformat ASCII file. 
+#' @title Reformat ASCII file. 
 #' 
-#' \code{mHM_formatASC} is rewriting the header of an ASCII file being written by \code{\link{writeRaster}}.
+#' @description \code{mHM_formatASC} is rewriting the header of an ASCII file being written by \code{\link{writeRaster}}.
 #' 
-#' ASCII files written by \code{\link{writeRaster}} do not fullfil conventions for mHM input ASCII files.
+#' @details ASCII files written by \code{\link{writeRaster}} do not fullfil conventions for mHM input ASCII files.
 #' This function rewrites the header and find&replaces additional zeros appended to -9999 values.
 #' 
 #' @param inASC character vector, gives location of raster files in ASCII format.
@@ -17,7 +17,7 @@
 #' 
 #' @seealso
 #' 
-#' @keywords ascii
+#' @keywords
 #'  
 #' @export mHM_formatASC
 #'

@@ -1,15 +1,13 @@
-#' Check minimum and maximum air temperature for consistency in NetCDF.
-#' 
-#' \code{mHM_checkT} proves if minimum air temperature is lower than maximum air temperature. 
-#' If this is not the case values are interchanged. Input format is netCDF.
-#' 
-#' Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning Tmax smaller than Tmin (or wise versa) will be printed. 
+#' @title Check minimum and maximum air temperature for consistency in NetCDF.
+#' @description \code{mHM_checkT} proves if minimum air temperature is lower than maximum air temperature. 
+#' If it is not the case values are interchanged.
+#' @details Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning Tmax smaller than Tmin (or wise versa) will be printed. 
 #' This function makes consistant minmum and maximum air temperature fields in netCDF format.
 #' 
 #' @param nc.tmin netCDF of minimum air temperature.
 #' @param nc.tmax netCDF of maximum air temperature.
 #' 
-#' @return re-write input netCDF files with consistent air temperatures.
+#' @return re-write input netCDF files with consistent air temperature extremes.
 #' 
 #' @examples
 #' pkg_path <- path.package("mHMr")
@@ -27,7 +25,7 @@
 #' @keywords
 #' 
 #' @export mHM_checkT
-#' 
+#' @importFrom RNetCDF open.nc var.get.nc var.put.nc close.nc
 
 mHM_checkT <- function(nc.tmin, nc.tmax)
 {

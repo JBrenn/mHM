@@ -2,12 +2,12 @@
 % Please edit documentation in R/mHM_extrapolNetCDF.R
 \name{mHM_extrapolNetCDF}
 \alias{mHM_extrapolNetCDF}
-\title{Simple extrapolation of netCDF in invalid locations.}
+\title{Simple extrapolation of netCDF in invalid/border locations.}
 \usage{
 mHM_extrapolNetCDF(netCDF, var, ext, return = FALSE)
 }
 \arguments{
-\item{netCDF}{netCDF file name, full path.}
+\item{netCDF}{netCDF file name (full path).}
 
 \item{var}{character, name of variable to extrapolate.}
 
@@ -19,8 +19,8 @@ mHM_extrapolNetCDF(netCDF, var, ext, return = FALSE)
 netCDF file
 }
 \description{
-\code{mHM_extrapolNetCDF} uses mHM_extrapolMat to extrapolate its matrix values in invalid location, e.g. originating from 
-meteorological input fields for mHM (netCDF format).
+\code{mHM_extrapolNetCDF} uses mHM_extrapolMat to extrapolate its matrix values in invalid and border location, 
+e.g. originating from meteorological input fields for mHM (netCDF format).
 }
 \details{
 Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning
@@ -53,7 +53,7 @@ Caution: netCDF input file will be overwritten, backup original file before use.
 
 }
 \seealso{
-
+\code{\link[mHMr]{mHM_extrapolMat}}
 }
 \author{
 Johannes Brenner \email{johannes.brenner@ufz.de}

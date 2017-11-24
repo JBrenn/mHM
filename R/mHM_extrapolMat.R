@@ -1,11 +1,10 @@
-#' Simple extrapolation of 1D-arrays in invalid locations. 
-#' 
-#' \code{mHM_extrapolMat} extrapolates matrix values in invalid location, e.g. originating from 
+#' @title Simple extrapolation of 1D-arrays in invalid/border locations. 
+#' @description \code{mHM_extrapolMat} extrapolates matrix values in invalid and border locations, e.g. originating from 
 #' meteorological input fields for mHM (netCDF format).
 #' 
-#' Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning
+#' @details Runing mHM the first time for some netCDF products (e.g. Spain02, E-OBS) the warning
 #' no meteorological input available for whole simulation domain will be printed. 
-#' This function extrapolates grids in invalid locations within a radius given by \code{ext}.
+#' This function extrapolates grids in invalid locations within a radius given by the \code{ext} argument.
 #' Extrapolation is performed by a mean value of the surrounding cells of the invalid location.
 #' 
 #' @param data matrix.
@@ -27,18 +26,16 @@
 #' tmin2 <- mHM_extrapolMat(tmin[,,1], ext=2)
 #' image(tmin2, zlim = c(2.5,4.5))
 #' 
-#' 
-#' 
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #' 
 #' @references
 #' 
-#' @seealso
+#' @seealso \code{\link[mHMr]{mHM_extrapolNetCDF}}
 #' 
 #' @keywords
 #' 
 #' @export mHM_extrapolMat
-#' 
+#' @importFrom 
 
 mHM_extrapolMat <- function(data, ext)
 {
