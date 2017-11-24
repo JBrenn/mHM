@@ -89,7 +89,7 @@ mHM_enlargeNETCDF <- function(netcdf, x, y, var, fixcorner=1)
   y_new <- seq(y_con[1]+(y-1)*y_con[2]-y_con[1], y_con[1], -(y_con[1]-y_con[2]))
   RNetCDF::var.put.nc(con_new, "y", t)
   #var
-  RNetCDF::var.put.nc(con_new, var, new.data, start = c(1,1,1), count = c(x,y,lenght(t)))
+  RNetCDF::var.put.nc(con_new, var, new.data, start = c(1,1,1), count = c(x,y,length(t)))
   
   # close connections
   RNetCDF::close.nc(con)
