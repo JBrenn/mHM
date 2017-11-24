@@ -1,12 +1,12 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param netcdf PARAM_DESCRIPTION
-#' @param x PARAM_DESCRIPTION
-#' @param y PARAM_DESCRIPTION
-#' @param var PARAM_DESCRIPTION
-#' @param fixcorner PARAM_DESCRIPTION, Default: 1
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title mHM_enlargeNETCDF
+#' @description enlarge netCDF file in its x and y dimension
+#' @param netcdf netCDF file
+#' @param x integer, x dimension length after enlargement of field 
+#' @param y integer, y dimension length after enlargement of field 
+#' @param var name of varable to process 
+#' @param fixcorner field corner not to be moved, Default: 1. See detail
+#' @return NULL, new netCDF file will be written beside exiating in-netCDF
+#' @details fixcorner 1: bottomleft, fixcorner 2: topleft, fixcorner 3: topright, fixcorner 4: bottomright
 #' @examples 
 #' \dontrun{
 #' if(interactive()){

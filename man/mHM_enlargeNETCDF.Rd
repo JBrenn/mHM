@@ -2,29 +2,29 @@
 % Please edit documentation in R/mHM_enlargeNETCDF.R
 \name{mHM_enlargeNETCDF}
 \alias{mHM_enlargeNETCDF}
-\title{FUNCTION_TITLE}
+\title{mHM_enlargeNETCDF}
 \usage{
 mHM_enlargeNETCDF(netcdf, x, y, var, fixcorner = 1)
 }
 \arguments{
-\item{netcdf}{PARAM_DESCRIPTION}
+\item{netcdf}{netCDF file}
 
-\item{x}{PARAM_DESCRIPTION}
+\item{x}{integer, x dimension length after enlargement of field}
 
-\item{y}{PARAM_DESCRIPTION}
+\item{y}{integer, y dimension length after enlargement of field}
 
-\item{var}{PARAM_DESCRIPTION}
+\item{var}{name of varable to process}
 
-\item{fixcorner}{PARAM_DESCRIPTION, Default: 1}
+\item{fixcorner}{field corner not to be moved, Default: 1. See detail}
 }
 \value{
-OUTPUT_DESCRIPTION
+NULL, new netCDF file will be written beside exiating in-netCDF
 }
 \description{
-FUNCTION_DESCRIPTION
+enlarge netCDF file in its x and y dimension
 }
 \details{
-DETAILS
+fixcorner 1: bottomleft, fixcorner 2: topleft, fixcorner 3: topright, fixcorner 4: bottomright
 }
 \examples{
 \dontrun{
