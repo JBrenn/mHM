@@ -35,7 +35,6 @@
 #' @keywords
 #' 
 #' @export mHM_extrapolMat
-#' @importFrom 
 
 mHM_extrapolMat <- function(data, ext)
 {

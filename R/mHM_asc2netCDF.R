@@ -1,8 +1,6 @@
-#' @titel convert ascii to netCDF. 
+#' @titel convert ascii to netCDF.
 #' 
 #' @description \code{mHM_asc2netCDF} is converting ascii spatial file format to netCDF.
-#' 
-#' @details 
 #' 
 #' @param rst raster input object, either raster obj or files formate for read in with \code{\link[raster]{raster}}.
 #' @param outfile character, output file name, default: "out.nc".
