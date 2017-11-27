@@ -15,7 +15,7 @@
 #'  \code{\link[mHMr]{mHM_formatASC}}
 #' @rdname mHM_enlcutgrid
 #' @export mHM_enlcutgrid
-#' @importFrom raster raster getValues setValues
+#' @importFrom raster raster getValues setValues res writeRaster
 #' 
 mHM_enlcutgrid <- function(wd, ncol, nrow)
 {
@@ -72,13 +72,13 @@ mHM_enlcutgrid <- function(wd, ncol, nrow)
     ymx <- ext@ymin + nrow* res(rst)[1]
     r <- raster(xmn=ext@xmin,xmx=xmx,ymn=ext@ymin,ymx=ymx,nrow=nrow,ncol=ncol)
     
-    res(r) <- c(500,500)
+    raster::res(r) <- c(500,500)
     
     # set new data
     r <- raster::setValues(x = r, values = rst_mat_new)
     
     # write raster
-    writeRaster(x = r, filename = i, overwrite=T)
+    raster::writeRaster(x = r, filename = i, overwrite=T)
     
     # format asc
     mHMr::mHM_formatASC(inASC = i)
