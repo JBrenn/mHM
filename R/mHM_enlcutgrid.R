@@ -42,10 +42,10 @@ mHM_enlcutgrid <- function(wd, ncol, nrow)
       # add NA cols to matrix
       rst_mat_new <- matrix(NA, nrow = nrow(rst_mat), ncol = ncol-ncol(rst_mat))
       rst_mat_new <- cbind(rst_mat, rst_mat_new)
-    } else if (ncol > rst@ncols) {
+    } else if (ncol < rst@ncols) {
       # new ncol < old ncol
       # cut cols from matrix
-      rst_mat_new <- rst_mat[,-c((ncol+1):nrow(rst_mat))]
+      rst_mat_new <- rst_mat[,-c((ncol+1):ncol(rst_mat))]
     } else {
       rst_mat_new <- rst_mat
       print("nothing to do, ncol equal.")
@@ -57,7 +57,7 @@ mHM_enlcutgrid <- function(wd, ncol, nrow)
       # add NA rows to matrix
       rst_mat_new_row <- matrix(NA, nrow = nrow-nrow(rst_mat_new), ncol = ncol(rst_mat_new))
       rst_mat_new <- rbind(rst_mat_new_row, rst_mat_new)
-    } else if (nrow > rst@nrows) {
+    } else if (nrow < rst@nrows) {
       # new nrow < old nrow
       # cut rows from matrix
       rst_mat_new <- rst_mat_new[-c(1:(nrow(rst_mat_new)-nrow)),]
