@@ -1,7 +1,5 @@
-#' @titel convert ascii to netCDF.
-#' 
+#' @title convert ascii to netCDF.
 #' @description \code{mHM_asc2netCDF} is converting ascii spatial file format to netCDF.
-#' 
 #' @param rst raster input object, either raster obj or files formate for read in with \code{\link[raster]{raster}}.
 #' @param outfile character, output file name, default: "out.nc".
 #' @param crs either character proj4 coordinate projection definition, e.g. "+proj=utm +zone=30 +ellps=intl +units=m +no_defs" for "epsg:23030". Or character epsg coordinate projection definition, e.g. "epsg:23030".
