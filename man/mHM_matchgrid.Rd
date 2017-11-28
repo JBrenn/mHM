@@ -32,5 +32,4 @@ if(interactive()){
 }
 \seealso{
 \code{\link[raster]{raster}},\code{\link[raster]{crs}},\code{\link[raster]{resample}},\code{\link[raster]{mask}},\code{\link[raster]{writeRaster}}
- \code{\link[mHMr]{mHM_formatASC}}
 }

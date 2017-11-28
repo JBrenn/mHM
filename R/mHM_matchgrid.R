@@ -13,11 +13,9 @@
 #' }
 #' @seealso 
 #'  \code{\link[raster]{raster}},\code{\link[raster]{crs}},\code{\link[raster]{resample}},\code{\link[raster]{mask}},\code{\link[raster]{writeRaster}}
-#'  \code{\link[mHMr]{mHM_formatASC}}
 #' @rdname mHM_matchgrid
-#' @export 
+#' @export mHM_matchgrid
 #' @importFrom raster raster crs resample mask writeRaster
-#' @importFrom mHMr mHM_formatASC
 mHM_matchgrid <- function(grids, mask_grid, 
                           proj4="+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
 {

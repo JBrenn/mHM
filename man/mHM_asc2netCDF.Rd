@@ -44,4 +44,3 @@ netCDF written to outfile.
 \author{
 Johannes Brenner \email{johannes.brenner@ufz.de}
 }
-\keyword{}

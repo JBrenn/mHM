@@ -20,9 +20,7 @@
 #' 
 #' @seealso 
 #' \code{\link[raster]{raster}}, \code{\link[raster]{crs}}, \code{\link[raster]{writeRaster}}, \code{\link[raster]{projectRaster}}
-#' 
-#' @keywords
-#'  
+#' @rdname mHM_asc2netCDF
 #' @export mHM_asc2netCDF
 #' @importFrom raster raster crs writeRaster projectRaster
 #'
