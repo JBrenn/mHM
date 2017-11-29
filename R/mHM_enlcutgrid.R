@@ -70,9 +70,9 @@ mHM_enlcutgrid <- function(wd, ncol, nrow)
     # create new raster
     # set new extent 
     ext <- rst@extent
-    xmx <- ext@xmin + ncol* res(rst)[2]
-    ymx <- ext@ymin + nrow* res(rst)[1]
-    r <- raster(xmn=ext@xmin,xmx=xmx,ymn=ext@ymin,ymx=ymx,nrow=nrow,ncol=ncol)
+    xmx <- ext@xmin + ncol* raster::res(rst)[2]
+    ymx <- ext@ymin + nrow* raster::res(rst)[1]
+    r <- raster::raster(xmn=ext@xmin,xmx=xmx,ymn=ext@ymin,ymx=ymx,nrow=nrow,ncol=ncol)
     
     raster::res(r) <- c(500,500)
     
@@ -84,8 +84,6 @@ mHM_enlcutgrid <- function(wd, ncol, nrow)
     
     # format asc
     mHMr::mHM_formatASC(inASC = i)
-    
-    # return
-    return(NULL)
+  
   }
 }
