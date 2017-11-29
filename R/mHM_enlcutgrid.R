@@ -27,6 +27,8 @@ mHM_enlcutgrid <- function(wd, ncol, nrow)
   # loop over files
   for (i in files)
   {
+    # 
+    print(paste("process", i))
     # make back up of file
     system(paste("cp ", i, " ", i, ".bak", sep=""))
     # read raster
