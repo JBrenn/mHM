@@ -19,6 +19,10 @@
 mHM_matchgrid <- function(grids, mask_grid, 
                           proj4="+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
 {
+  # read in grid2 
+  r2 <- raster::raster(mask_grid, varname="pre")
+  raster::crs(r2) <- proj4
+  
   for (grid in grids)
   {
     # 
@@ -30,11 +34,8 @@ mHM_matchgrid <- function(grids, mask_grid,
     # read in grid1 
     r1 <- raster::raster(grid)
     
-    # read in grid2 
-    r2 <- raster::raster(mask_grid, varname="pre")
-    
     # add projection
-    raster::crs(r1) <- raster::crs(r2) <- proj4
+    raster::crs(r1) <- proj4
     
     # crop data r1
     r1_crop <- raster::crop(r1, r2)
