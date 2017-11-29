@@ -35,6 +35,6 @@ mHM_formatASC <- function(inASC)
     system(paste("sed -i -e 's/XLLCORNER/xllcorner/g' ", write2, sep=""))
     system(paste("sed -i -e 's/YLLCORNER/yllcorner/g' ", write2, sep=""))
     system(paste("sed -i -e 's/CELLSIZE/cellsize/g' ", write2, sep=""))
-    system(paste("rm ", write2, "-e", sep=""))
+    #system(paste("rm ", write2, "-e", sep=""))
   }
 }
