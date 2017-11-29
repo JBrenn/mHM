@@ -1,6 +1,6 @@
 #' @title match grids
 #' @description \code{mHM_matchgrid} does mask grids, e.g. morphological maps (.asc) by netCDF meteorological mHM input.
-#' @param grids grid files to be mask
+#' @param grids grid files to be masked
 #' @param mask_grid grid mask
 #' @param proj4 PARAM_DESCRIPTION, Default: '+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs'
 #' @return grids will be written back to original file
@@ -51,6 +51,9 @@ mHM_matchgrid <- function(grids, mask_grid,
     
     # mask r1_crop data
     r <- raster::mask(x = r1_crop, mask = r2_crop)
+    
+    #r_crop_new <- ifelse(is.na(getValues(r2_crop)),NA,getValues(r1_crop))
+    #r <- setValues(r1_crop, r_crop_new)
     
     # write raster
     raster::writeRaster(r, grid, overwrite=T)
