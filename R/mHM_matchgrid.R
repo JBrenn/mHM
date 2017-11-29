@@ -36,16 +36,27 @@ mHM_matchgrid <- function(grids, mask_grid,
     # add projection
     raster::crs(r1) <- raster::crs(r2) <- proj4
     
-    # resample data r2
-    r2_res <- raster::resample(r2, r1)
+    # crop data r1
+    r1_crop <- raster::crop(r1, r2)
     
-    # mask data
-    r <- raster::mask(x = r1, mask = r2_res)
+    # resample data r2
+    #r2_res <- raster::resample(r2, r1_crop)
+    
+    # disaggregate r2
+    fact <- res(r2)[1] / res(r1)[1]
+    r2_res <- raster::disaggregate(r2, fact=fact)
+   
+    # crop data r2
+    r2_crop <- raster::crop(r2_res, r1_crop)
+    
+    # mask r1_crop data
+    r <- raster::mask(x = r1_crop, mask = r2_crop)
     
     # write raster
     raster::writeRaster(r, grid, overwrite=T)
     
     # format asc to mHM format
     mHMr::mHM_formatASC(inASC = grid)
+    
   }
 }
