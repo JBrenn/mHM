@@ -4,13 +4,15 @@
 \alias{mHM_matchgrid}
 \title{match grids}
 \usage{
-mHM_matchgrid(grids, mask_grid,
+mHM_matchgrid(grids, mask_grid, mask_var = "pre",
   proj4 = "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
 }
 \arguments{
-\item{grids}{grid files to be mask}
+\item{grids}{grid files to be masked}
 
 \item{mask_grid}{grid mask}
+
+\item{mask_var}{grid mask variable, Default: 'pre'}
 
 \item{proj4}{PARAM_DESCRIPTION, Default: '+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs'}
 }

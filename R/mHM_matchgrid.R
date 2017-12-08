@@ -2,6 +2,7 @@
 #' @description \code{mHM_matchgrid} does mask grids, e.g. morphological maps (.asc) by netCDF meteorological mHM input.
 #' @param grids grid files to be masked
 #' @param mask_grid grid mask
+#' @param mask_var grid mask variable, Default: 'pre'
 #' @param proj4 PARAM_DESCRIPTION, Default: '+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs'
 #' @return grids will be written back to original file
 #' @details grids will be backed up before processing
@@ -16,11 +17,11 @@
 #' @rdname mHM_matchgrid
 #' @export mHM_matchgrid
 #' @importFrom raster raster crs resample mask writeRaster
-mHM_matchgrid <- function(grids, mask_grid, 
+mHM_matchgrid <- function(grids, mask_grid, mask_var="pre",
                           proj4="+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
 {
   # read in grid2 
-  r2 <- raster::raster(mask_grid, varname="pre")
+  r2 <- raster::raster(mask_grid, varname=var)
   raster::crs(r2) <- proj4
   
   for (grid in grids)
