@@ -42,32 +42,38 @@ mHM_extrapolMat <- function(data, ext)
   {
     # get invalid locations in array
     arrTind <- which(is.na(data), arr.ind = T)
-    # apply function over these locations by row
-    corr <- apply(X = arrTind, MARGIN = 1, function(x, data) {
-      # define rows and colums to use for aggregation
-      rowsl <- x[1]-1; rowsu <- x[1]+1
-      if (rowsl < 1) rowsl <- 1
-      if (rowsu > dim(data)[1]) rowsu <- dim(data)[1]
-      rows <- (rowsl):(rowsu)
+    # if no NA in matrix
+    if (length(arrTind) == 0) {
+      #print("only valid values in matrix, nothing to do")
+      next()
+    } else { # apply function over these locations by row
+      corr <- apply(X = arrTind, MARGIN = 1, function(x, data) {
+        # define rows and colums to use for aggregation
+        rowsl <- x[1]-1; rowsu <- x[1]+1
+        if (rowsl < 1) rowsl <- 1
+        if (rowsu > dim(data)[1]) rowsu <- dim(data)[1]
+        rows <- (rowsl):(rowsu)
+        
+        colsl <- x[2]-1; colsu <- x[2]+1
+        if (colsl < 1) colsl <- 1
+        if (colsu > dim(data)[2]) colsu <- dim(data)[2]
+        cols <- (colsl):(colsu)
+        
+        # if there are only NAs within choosen values set new value to NA
+        # otherwise take mean value
+        if (any(!is.na(data[rows,cols]))) {
+          y <- mean(data[rows,cols], na.rm=T)
+        } else {
+          y <- NA
+        }
+        return(y)
+      }, data=data)
       
-      colsl <- x[2]-1; colsu <- x[2]+1
-      if (colsl < 1) colsl <- 1
-      if (colsu > dim(data)[2]) colsu <- dim(data)[2]
-      cols <- (colsl):(colsu)
-      
-      # if there are only NAs within choosen values set new value to NA
-      # otherwise take mean value
-      if (any(!is.na(data[rows,cols]))) {
-        y <- mean(data[rows,cols], na.rm=T)
-      } else {
-        y <- NA
-      }
-      return(y)
-    }, data=data)
-    
-    # update values in data matrix
-    for (i in 1:dim(arrTind)[1]) data[arrTind[i,1],arrTind[i,2]] <- corr[i]
+      # update values in data matrix
+      for (i in 1:dim(arrTind)[1]) data[arrTind[i,1],arrTind[i,2]] <- corr[i]
+    }
   }
+   
   # give back matrix
   return(data)
 }
