@@ -7,9 +7,9 @@
 mHM_getDateTime(nc_file, out_unit = "d")
 }
 \arguments{
-\item{out_unit}{definition of datetime unit out; 'h'=hour ,'d'=day, 'm'=month.}
+\item{nc_file}{netCDF file.}
 
-\item{con}{connection to netCDF file, see \code{\link{open.nc}}.}
+\item{out_unit}{definition of datetime unit out; 'h'=hour ,'d'=day, 'm'=month.}
 }
 \value{
 Chron datetime, Date or Yearmon object, depending on mHM output definition.
