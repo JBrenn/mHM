@@ -4,7 +4,7 @@
 #' 
 #' 
 #' 
-#' @param con connection to netCDF file, see \code{\link{open.nc}}.
+#' @param nc_file netCDF file.
 #' @param out_unit definition of datetime unit out; 'h'=hour ,'d'=day, 'm'=month.
 #' 
 #' @return Chron datetime, Date or Yearmon object, depending on mHM output definition.
