@@ -48,7 +48,7 @@ mHM_prolongRintime <- function(r, nc_time, nc_time_name, nc_out, nc_out_name,
   con <- RNetCDF::open.nc(con = nc_out, write = TRUE)
   
   # write data in netCDF
-  RNetCDF::var.put.nc(ncfile = con, variable = var_out, data = dummy, start = c(1,1,1), count = dim(dummy))
+  RNetCDF::var.put.nc(ncfile = con, variable = nc_time_name, data = dummy, start = c(1,1,1), count = dim(dummy))
   
   # change variable name
   RNetCDF::var.rename.nc(ncfile = con, variable = nc_time_name, newname = nc_out_name)
