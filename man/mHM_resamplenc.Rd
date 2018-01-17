@@ -19,6 +19,9 @@ raster object
 \description{
 resample netCDF data based on grid information of additional netCDF file.
 }
+\details{
+DETAILS
+}
 \examples{
 \dontrun{
 if(interactive()){

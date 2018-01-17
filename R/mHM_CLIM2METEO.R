@@ -4,7 +4,7 @@
 #' @param var_in variable name
 #' @param nc_out netCDF file from which raster info is drawn from
 #' @return raster object
-#' @details 
+#' @details DETAILS
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
@@ -14,7 +14,7 @@
 #' @seealso 
 #'  \code{\link[raster]{brick}},\code{\link[raster]{raster}},\code{\link[raster]{resample}}
 #' @rdname mHM_resamplenc
-#' @export 
+#' @export mHM_resamplenc
 #' @importFrom raster brick raster resample
 
 mHM_resamplenc <- function(nc_in, var_in, nc_out)
@@ -55,8 +55,7 @@ mHM_resamplenc <- function(nc_in, var_in, nc_out)
 #'  \code{\link[raster]{values}}
 #'  \code{\link[RNetCDF]{open.nc}},\code{\link[RNetCDF]{var.put.nc}},\code{\link[RNetCDF]{var.rename.nc}},\code{\link[RNetCDF]{att.put.nc}},\code{\link[RNetCDF]{close.nc}}
 #' @rdname mHM_prolongRintime
-#' @export 
-#' @importFrom mHMr mHM_getDateTime
+#' @export mHM_prolongRintime
 #' @importFrom raster values
 #' @importFrom RNetCDF open.nc var.put.nc var.rename.nc att.put.nc close.nc
 
