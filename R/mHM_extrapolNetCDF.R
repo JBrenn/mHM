@@ -54,15 +54,19 @@ mHM_extrapolNetCDF <- function(netCDF, var, ext, return=FALSE)
   # read in variable from connection
   ncvar <- RNetCDF::var.get.nc(nccon,var)
   
-  # extrapolate for each layer
-  for (i in 1:dim(ncvar)[3])
-  {
-    ncvar[,,i] <- mHMr::mHM_extrapolMat(ncvar[,,i], ext=ext)
+  # do not extrapolate if ncvar has no dim in space x,y
+  if ( length(dim(ncvar))<=1 ) {
+    print("point data set: nothing to do.")
+  } else {
+    # extrapolate for each layer
+    for (i in 1:dim(ncvar)[3])
+    {
+      ncvar[,,i] <- mHMr::mHM_extrapolMat(ncvar[,,i], ext=ext)
+    }
+    # write back matrix to con
+    RNetCDF::var.put.nc(ncfile = nccon, variable = var, data = ncvar)
   }
-  
-  # write back matrix to con
-  RNetCDF::var.put.nc(ncfile = nccon, variable = var, data = ncvar)
-  
+ 
   # close connection
   RNetCDF::close.nc(nccon)
   
