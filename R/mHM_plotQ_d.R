@@ -48,12 +48,12 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   if (!is.null(calibTime) && !is.null(validTime)) {
     # window calibration period
     ts_win <- window(ts, start = calibTime[1], end = calibTime[2])
-    GOFs_c <- KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
-    GOFs_c$NSE <- NSE(sim = ts_win[,2], obs = ts_win[,1])
+    GOFs_c <- hydroGOF::KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
+    GOFs_c$NSE <-  hydroGOF::NSE(sim = ts_win[,2], obs = ts_win[,1])
     # window validation period
     ts_win <- window(ts, start = validTime[1], end = validTime[2])
-    GOFs_v <- KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
-    GOFs_v$NSE <- NSE(sim = ts_win[,2], obs = ts_win[,1])
+    GOFs_v <- hydroGOF::KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
+    GOFs_v$NSE <-  hydroGOF::NSE(sim = ts_win[,2], obs = ts_win[,1])
     GOFs <- data.frame(gof_type=rep(names(unlist(GOFs_c)),2),
                        gof_value=round(c(unlist(GOFs_c),unlist(GOFs_v)), 2), 
                        sim_per=c(rep("calib",5),rep("valid",5)), basin=basinid)
@@ -61,10 +61,10 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   
   if (is.null(validTime) && is.null(validTime)) {
     ts_win <- window(ts, start = windows[1], end = windows[2])
-    GOFs <- KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
-    GOFs$NSE <- NSE(sim = ts_win[,2], obs = ts_win[,1])
-    GOFs <- unlist(GOFs_c)
-    GOFs <- data.frame(gof_type=names(unlist(GOFs_c)), gof_value=unlist(GOFs_c),
+    GOFs <-  hydroGOF::KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
+    GOFs$NSE <-  hydroGOF::NSE(sim = ts_win[,2], obs = ts_win[,1])
+    GOFs <- unlist(GOFs)
+    GOFs <- data.frame(gof_type=names(unlist(GOFs)), gof_value=round(unlist(GOFs),2),
                        basin=basinid)
   }
   
@@ -89,7 +89,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="", bty="n", ylim=ylims)  
   # plot polygon, calibration period
   if (!is.null(calibTime))
-    xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
+    zoo::xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
             col = grey.colors(n = 1, start = .5, end = .5, alpha = .3), bty="n")
   # horizontal lines at tickmarks
   yaxp <- par("yaxp")
@@ -103,18 +103,27 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
   lines(ts_win[,1], col=rgb(1,0,0,.8), lwd=3.5, lty=3)
   # legend
   legend("topright", legend = c("observation","simulation"), lwd = 3, col=c(rgb(1,0,0,.75), rgb(0,0,1,.75)), bty="n")
-  # legend KGE
-  kgetxtcal <- paste(c("KGE=", "r=", "beta=", "alpha="), 
-                  GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("calib", GOFs$sim_per)], 
-                  sep="")
-  kgetxtcal <- paste(kgetxtcal[1], kgetxtcal[2], kgetxtcal[3] ,kgetxtcal[4], sep=", ")
-  kgetxtcal <- paste("cal: ", kgetxtcal, sep="")
-  kgetxtval <- paste(c("KGE=", "r=", "beta=", "alpha="), 
-                     GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("valid", GOFs$sim_per)], 
-                     sep="")
-  kgetxtval <- paste(kgetxtval[1], kgetxtval[2], kgetxtval[3] ,kgetxtval[4], sep=", ")
-  kgetxtval <- paste("val: ", kgetxtval, sep="")
-  legend("topleft", legend = c(kgetxtcal, kgetxtval), bty="n")
+  if (!is.null(calibTime) && !is.null(validTime)) {
+    # legend KGE
+    kgetxtcal <- paste(c("KGE=", "r=", "beta=", "alpha="), 
+      GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("calib", GOFs$sim_per)], 
+      sep="")
+    kgetxtcal <- paste(kgetxtcal[1], kgetxtcal[2], kgetxtcal[3] ,kgetxtcal[4], sep=", ")
+    kgetxtcal <- paste("cal: ", kgetxtcal, sep="")
+    kgetxtval <- paste(c("KGE=", "r=", "beta=", "alpha="), 
+      GOFs$gof_value[grepl("KGE", GOFs$gof_type) & grepl("valid", GOFs$sim_per)], 
+      sep="")
+    kgetxtval <- paste(kgetxtval[1], kgetxtval[2], kgetxtval[3] ,kgetxtval[4], sep=", ")
+    kgetxtval <- paste("val: ", kgetxtval, sep="")
+    legend("topleft", legend = c(kgetxtcal, kgetxtval), bty="n")
+  }
+  if (is.null(calibTime) && is.null(validTime)) {
+    # legend KGE
+    kgetxt <- paste(c("KGE=", "r=", "beta=", "alpha="), 
+      GOFs$gof_value[grepl("KGE", GOFs$gof_type)], sep="")
+    kgetxt <- paste(kgetxt[1], kgetxt[2], kgetxt[3] ,kgetxt[4], sep=", ")
+    legend("topleft", legend = kgetxt, bty="n")
+  }
   par(op)
   dev.off()
   

@@ -74,7 +74,7 @@ mHM_plotQmulti_d <- function(ts1, ts2, windows = c(start=as.Date("1989-10-01"), 
   plot(ts_win, screens = c(1,1), col="white", lwd=2.5, ylab=expression(paste("river flow [",m^3,"/",s,"]",sep="")), xlab="", bty="n", ylim=ylims)  
   # plot polygon, calibration period
   if (!is.null(calibTime))
-    xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
+    zoo::xblocks(time(ts_win), time(ts_win)>calibTime[1] & time(ts_win)<calibTime[2],
             col = grey.colors(n = 1, start = .5, end = .5, alpha = .3), bty="n")
   # horizontal lines at tickmarks
   yaxp <- par("yaxp")
