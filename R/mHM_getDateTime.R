@@ -46,10 +46,16 @@ mHM_getDateTime <- function(nc_file, out_unit="d")
   # get start time
   start_time <- stringr::str_sub(string = start_datetime, start = tab_start_datetime[1]+1, end = nchar(start_datetime))
   # create chron object origin
+  if (in_unit == "m")
+  {
+    if (grepl("-00", start_date))
+      start_date <- gsub("-00", "-01", start_date)
+  }
   start_chron <- chron::chron(dates. = start_date, times. = start_time, format = c(dates="y-m-d", times="h:m:s"))
   # create chron time series
   if (in_unit == "h") fact <- 24
   if (in_unit == "d") fact <- 1
+  if (in_unit == "m") fact <- 1/30
   ts_chron <- start_chron + datetime_int/fact
   
   # if daily data return Date object
