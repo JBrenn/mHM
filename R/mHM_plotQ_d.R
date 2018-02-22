@@ -59,7 +59,7 @@ mHM_plotQ_d <- function(ts, windows = c(start=as.Date("1989-10-01"), end=as.Date
                        sim_per=c(rep("calib",5),rep("valid",5)), basin=basinid)
   } 
   
-  if (is.null(validTime) && is.null(validTime)) {
+  if (is.null(calibTime) && is.null(validTime)) {
     ts_win <- window(ts, start = windows[1], end = windows[2])
     GOFs <-  hydroGOF::KGE(sim = ts_win[,2], obs = ts_win[,1], out.type=c("full"))
     GOFs$NSE <-  hydroGOF::NSE(sim = ts_win[,2], obs = ts_win[,1])
