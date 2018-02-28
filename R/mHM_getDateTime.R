@@ -55,7 +55,11 @@ mHM_getDateTime <- function(nc_file, out_unit="d")
   # create chron time series
   if (in_unit == "h") fact <- 24
   if (in_unit == "d") fact <- 1
-  if (in_unit == "m") fact <- 1/30
+  if (in_unit == "m") {
+    start_chron <- as.yearmon(start_chron)
+    fact <- 12
+    if (!all(is.integer(datetime_int))) datetime_int <- ceiling(datetime_int) -1
+  } 
   ts_chron <- start_chron + datetime_int/fact
   
   # if daily data return Date object
